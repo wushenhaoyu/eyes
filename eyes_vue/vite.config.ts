@@ -8,6 +8,9 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
+import path from 'path'
+import Vue from '@vitejs/plugin-vue'
+const pathSrc = path.resolve(__dirname, 'src')
 
 
 // https://vitejs.dev/config/
@@ -20,12 +23,16 @@ export default defineConfig({
     }),
     vue(),
     AutoImport({
-      resolvers: [ElementPlusResolver(),IconsResolver()],
+      resolvers: [ElementPlusResolver(),IconsResolver({
+        prefix: 'Icon',
+      }),],
+      dts: path.resolve(pathSrc, 'auto-imports.d.ts'),
     }),
     Components({
       dirs: ['src/components/'],
       extensions: ['vue', 'md'],
-      resolvers: [ElementPlusResolver(), AntDesignVueResolver()],
+      resolvers: [IconsResolver({enabledCollections: ['ep'],}),ElementPlusResolver(), AntDesignVueResolver()],
+        dts: path.resolve(pathSrc, 'components.d.ts'),
     }),
     Icons({
       compiler: 'vue3',
@@ -35,7 +42,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
+      '@': pathSrc,
+    },
   }
 })

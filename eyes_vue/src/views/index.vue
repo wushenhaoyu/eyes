@@ -9,31 +9,24 @@
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b"
-      style="display: flex; justify-content: right;"
-    >   
-      <el-menu-item index="1">Processing Center</el-menu-item>
-      <el-sub-menu index="2">
+      style="display: flex; justify-content: right;height: 6vh;"
+    >
+      <el-sub-menu index="2" style="font-size: 3vw;">
         <template #title>
       <el-avatar
         src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-      style="vertical-align: center;"/>
+      style="vertical-align: center;width: 4vh;height: 4vh;"/>  
       </template>
-        <el-menu-item index="2-1">item one</el-menu-item>
-        <el-menu-item index="2-2">item two</el-menu-item>
-        <el-menu-item index="2-3">item three</el-menu-item>
-        <el-sub-menu index="2-4">
-          <template #title>item four</template>
-          <el-menu-item index="2-4-1">item one</el-menu-item>
-          <el-menu-item index="2-4-2">item two</el-menu-item>
-          <el-menu-item index="2-4-3">item three</el-menu-item>
-        </el-sub-menu>
+        <el-menu-item @click="clickMenu" style="height:3vh;font-size: 1vw;display: flex;justify-content: center;" index="info" >账号信息</el-menu-item>
+        <el-menu-item @click="clickMenu" style="height:3vh;font-size: 1vw;display: flex;justify-content: center;" index="individual">个人中心</el-menu-item>
+        <el-menu-item @click="clickMenu" style="height:3vh;font-size: 1vw;display: flex;justify-content: center;" index="setting">设置</el-menu-item>
       </el-sub-menu>
     </el-menu>
         </el-header>
         <!--此处结束header-->
         <el-container>
             <!--此处开始为aside-->
-      <el-aside style="width: 13vw;font-weight: 900;text-align: center;">
+      <el-aside style="font-weight: 900;text-align: center;">
         <el-row class="tac">
       <el-col >
        <!-- <h5 class="mb-2">Custom colors</h5>-->
@@ -45,24 +38,25 @@
           text-color="#fff"
         >
         <el-menu-item  index="/index" @click="clickMenu">
-            <el-icon><icon-menu /></el-icon>
+            <House style="width: 1em; height: 1em; margin-right: 8px;font-size: 1.5vw;" />
             <span>首页</span>
-          </el-menu-item>
+          </el-menu-item> 
           <el-menu-item  index="/patient1" @click="clickMenu">
-            <el-icon><icon-menu /></el-icon>
+            <User style="width: 1em; height: 1em; margin-right: 8px;font-size: 1.5vw;" />
             <span>待诊患者</span>
           </el-menu-item>
           <el-menu-item  index="/patient2" @click="clickMenu">
-            <el-icon><icon-menu /></el-icon>
+            <UserFilled style="width: 1em; height: 1em; margin-right: 8px;font-size: 1.5vw;" />
             <span>历史患者</span>
           </el-menu-item>
+          
           <el-menu-item index="2" @click="clickMenu">
-            <el-icon><icon-menu /></el-icon>
-            <span>Navigator Two</span>
+            <UserFilled style="width: 1em; height: 1em; margin-right: 8px;font-size: 1.5vw;" />
+            <span>Two</span>
           </el-menu-item>
           <el-menu-item index="3" @click="clickMenu">   
-            <el-icon><setting /></el-icon>
-            <span>Navigator Four</span>
+            <Setting style="width: 1em; height: 1em; margin-right: 8px;font-size: 1.5vw;" />
+            <span>Four</span>
           </el-menu-item>
         </el-menu>
       </el-col>
@@ -77,10 +71,31 @@
     </div>
   </template>
 
-<style>
+<style scoped>
+:deep() .el-menu-item {
+line-height:5vh;
+font-size:2vw;
+height:5vh;
+}
+:deep() .el-header {
+  height: 6vh;
+}
+:deep() .el-aside {
+  height: 94vh;
+  width: 15vw;
+}
+:deep() .el-main {
+  padding: 0;
+  height: 94vh;
+}
 
-/deep/ .el-menu-item {
-    
+
+body{
+    font-size:12px
+}
+span{
+    font-size:1.5vw;
+    font-weight:550
 }
 </style>
 
@@ -90,7 +105,7 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   data() {
     return {
-      greeting: 'Hello, Vue 3 with TypeScript!'
+      size:20
     };
   },
   methods: {

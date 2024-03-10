@@ -1,3 +1,3 @@
 <template>
-    patient1
+    this is setting
 </template>

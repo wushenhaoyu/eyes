@@ -33,17 +33,4 @@ a,
     padding: 0 2rem;
   }
 }*/
-.el-header {
-  height: 70px;
-}
-.el-aside {
-  height: calc(100vh - 70px);
-  width: 10vw;
-}
-.el-main {
-  padding: 0;
-  height: calc(100vh - 70px);
-}
-.el-menu-item{
-  padding: 0;
-}
+
