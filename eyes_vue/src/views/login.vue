@@ -318,7 +318,7 @@ export default defineComponent({
         message: e,
         type: 'success',
       })
-    }
+    },
     checkEmail(email)
     {
     // 使用正则表达式进行邮箱格式验证
