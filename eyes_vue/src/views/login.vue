@@ -306,8 +306,8 @@ export default defineComponent({
           this.userName = userName
           this.password = this.password
         },1500)
-    }
-  },
+      }
+    },
     showError(e:string)
     {
       ElMessage.error(e)
@@ -319,14 +319,14 @@ export default defineComponent({
         type: 'success',
       })
     },
-    checkEmail(email)
+    checkEmail(email:string)
     {
     // 使用正则表达式进行邮箱格式验证
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     console.log(regex.test(email))
     return regex.test(email);
     },
-    checkPassword(password) {
+    checkPassword(password:string) {
     // 正则表达式用于检查密码是否包含至少一个大写字母、一个小写字母、一个数字和一个特殊符号
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     console.log(regex.test(password))
