@@ -63,7 +63,7 @@
     </el-row>
       </el-aside>
       <!--此处结束aside-->
-          <el-main>
+          <el-main style="background-color: white;">
             
             <RouterView></RouterView></el-main>
         </el-container>
@@ -99,7 +99,7 @@ span{
 }
 </style>
 
-<script lang="ts">
+<script lang="ts">  
 import { defineComponent } from 'vue';
 
 export default defineComponent({
