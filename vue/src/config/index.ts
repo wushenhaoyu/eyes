@@ -17,3 +17,5 @@ export const AMAP_MAP_KEY: string = "";
 
 // 百度地图 key
 export const BAIDU_MAP_KEY: string = "";
+
+export const REGISTER_URL: string = "/login/register";

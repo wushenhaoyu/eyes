@@ -44,9 +44,6 @@
       <!-- 表格操作 -->
       <template #operation="scope">
         <el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
-        <el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)">编辑</el-button>
-        <el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)">重置密码</el-button>
-        <el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)">删除</el-button>
       </template>
     </ProTable>
     <UserDrawer ref="drawerRef" />
@@ -60,23 +57,23 @@ import { useRouter } from "vue-router";
 import { User } from "@/api/interface";
 import { useHandleData } from "@/hooks/useHandleData";
 import { useDownload } from "@/hooks/useDownload";
-import { useAuthButtons } from "@/hooks/useAuthButtons";
+/*import { useAuthButtons } from "@/hooks/useAuthButtons";*/
 import { ElMessage, ElMessageBox } from "element-plus";
 import ProTable from "@/components/ProTable/index.vue";
 import ImportExcel from "@/components/ImportExcel/index.vue";
 import UserDrawer from "@/views/proTable/components/UserDrawer.vue";
 import { ProTableInstance, ColumnProps, HeaderRenderScope } from "@/components/ProTable/interface";
-import { CirclePlus, Delete, EditPen, Download, Upload, View, Refresh } from "@element-plus/icons-vue";
+import { CirclePlus, Delete, Download, Upload, View } from "@element-plus/icons-vue";
 import {
   getUserList,
   deleteUser,
   editUser,
   addUser,
-  changeUserStatus,
-  resetUserPassWord,
+  //changeUserStatus,
+  //resetUserPassWord,
   exportUserInfo,
   BatchAddUser,
-  getUserStatus,
+  // getUserStatus,
   getUserGender
 } from "@/api/modules/user";
 
@@ -116,7 +113,7 @@ const getTableList = (params: any) => {
 };
 
 // 页面按钮权限（按钮权限既可以使用 hooks，也可以直接使用 v-auth 指令，指令适合直接绑定在按钮上，hooks 适合根据按钮权限显示不同的内容）
-const { BUTTONS } = useAuthButtons();
+/*const { BUTTONS } = useAuthButtons();*/
 
 // 自定义渲染表头（使用tsx语法）
 const headerRender = (scope: HeaderRenderScope<User.ResUserList>) => {
@@ -156,27 +153,7 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
     search: { el: "select", props: { filterable: true } },
     fieldNames: { label: "genderLabel", value: "genderValue" }
   },
-  {
-    // 多级 prop
-    prop: "user.detail.age",
-    label: "年龄",
-    search: {
-      // 自定义 search 显示内容
-      render: ({ searchParam }) => {
-        return (
-          <div class="flx-center">
-            <el-input vModel_trim={searchParam.minAge} placeholder="最小年龄" />
-            <span class="mr10 ml10">-</span>
-            <el-input vModel_trim={searchParam.maxAge} placeholder="最大年龄" />
-          </div>
-        );
-      }
-    }
-  },
-  { prop: "idCard", label: "身份证号", search: { el: "input" } },
-  { prop: "email", label: "邮箱" },
-  { prop: "address", label: "居住地址" },
-  {
+  /* {
     prop: "status",
     label: "用户状态",
     enum: getUserStatus,
@@ -199,10 +176,54 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
         </>
       );
     }
+  },*/
+  {
+    // 多级 prop
+    prop: "user.detail.age",
+    label: "年龄",
+    search: {
+      // 自定义 search 显示内容
+      render: ({ searchParam }) => {
+        return (
+          <div class="flx-center">
+            <el-input vModel_trim={searchParam.minAge} placeholder="最小年龄" />
+            <span class="mr10 ml10">-</span>
+            <el-input vModel_trim={searchParam.maxAge} placeholder="最大年龄" />
+          </div>
+        );
+      }
+    }
   },
+  { prop: "idCard", label: "身份证号", search: { el: "input" } },
+  { prop: "email", label: "邮箱" },
+  { prop: "address", label: "居住地址" },
+  /*{
+    prop: "status",
+    label: "用户状态",
+    enum: getUserStatus,
+    search: { el: "tree-select", props: { filterable: true } },
+    fieldNames: { label: "userLabel", value: "userStatus" },
+    render: scope => {
+      return (
+        <>
+          {BUTTONS.value.status ? (
+            <el-switch
+              model-value={scope.row.status}
+              active-text={scope.row.status ? "启用" : "禁用"}
+              active-value={1}
+              inactive-value={0}
+              onClick={() => changeStatus(scope.row)}
+            />
+          ) : (
+            <el-tag type={scope.row.status ? "success" : "danger"}>{scope.row.status ? "启用" : "禁用"}</el-tag>
+          )}
+        </>
+      );
+    }
+  },*/
   {
     prop: "createTime",
-    label: "创建时间",
+    label: "挂号时间",
     headerRender,
     width: 180,
     search: {
@@ -212,7 +233,7 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
       defaultValue: ["2022-11-12 11:35:00", "2022-12-12 11:35:00"]
     }
   },
-  { prop: "operation", label: "操作", fixed: "right", width: 330 }
+  { prop: "operation", label: "操作", fixed: "right", width: 120 }
 ]);
 
 // 表格拖拽排序
@@ -223,10 +244,10 @@ const sortTable = ({ newIndex, oldIndex }: { newIndex?: number; oldIndex?: numbe
 };
 
 // 删除用户信息
-const deleteAccount = async (params: User.ResUserList) => {
+/*const deleteAccount = async (params: User.ResUserList) => {
   await useHandleData(deleteUser, { id: [params.id] }, `删除【${params.username}】用户`);
   proTable.value?.getTableList();
-};
+};*/
 
 // 批量删除用户信息
 const batchDelete = async (id: string[]) => {
@@ -236,16 +257,16 @@ const batchDelete = async (id: string[]) => {
 };
 
 // 重置用户密码
-const resetPass = async (params: User.ResUserList) => {
+/*const resetPass = async (params: User.ResUserList) => {
   await useHandleData(resetUserPassWord, { id: params.id }, `重置【${params.username}】用户密码`);
   proTable.value?.getTableList();
-};
+};*/
 
 // 切换用户状态
-const changeStatus = async (row: User.ResUserList) => {
+/*const changeStatus = async (row: User.ResUserList) => {
   await useHandleData(changeUserStatus, { id: row.id, status: row.status == 1 ? 0 : 1 }, `切换【${row.username}】用户状态`);
   proTable.value?.getTableList();
-};
+};*/
 
 // 导出用户列表
 const downloadFile = async () => {

@@ -15,7 +15,25 @@ export const staticRouter: RouteRecordRaw[] = [
     component: () => import("@/views/login/index.vue"),
     meta: {
       title: "登录"
-    }
+    },
+    children: [
+      {
+        path: "", // 将空路径设置为默认子路由
+        name: "login",
+        component: () => import("@/views/login/components/LoginForm.vue"),
+        meta: {
+          title: "登录"
+        }
+      },
+      {
+        path: "register",
+        name: "register",
+        component: () => import("@/views/login/components/RegisterForm.vue"),
+        meta: {
+          title: "注册"
+        }
+      }
+    ]
   },
   {
     path: "/layout",

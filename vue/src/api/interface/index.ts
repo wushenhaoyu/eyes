@@ -43,6 +43,18 @@ export namespace Login {
     [key: string]: string[];
   }
 }
+export namespace Register {
+  export interface ReqRegisterForm {
+    username: string;
+    password: string;
+    authCode: string;
+    verificationCode: string;
+  }
+  export interface ResRegister {
+    message: string;
+    success: number;
+  }
+}
 
 // 用户管理模块
 export namespace User {

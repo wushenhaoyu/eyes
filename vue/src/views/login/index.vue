@@ -8,17 +8,18 @@
       <div class="login-form">
         <div class="login-logo">
           <img class="login-icon" src="@/assets/images/logo.svg" alt="" />
-          <h2 class="logo-text">Geeker-Admin</h2>
+          <h2 class="logo-text">眼震诊疗平台</h2>
         </div>
-        <LoginForm />
+        <RouterView></RouterView>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts" name="login">
-import LoginForm from "./components/LoginForm.vue";
+//import LoginForm from "./components/LoginForm.vue";
 import SwitchDark from "@/components/SwitchDark/index.vue";
+import { RouterView } from "vue-router";
 </script>
 
 <style scoped lang="scss">
