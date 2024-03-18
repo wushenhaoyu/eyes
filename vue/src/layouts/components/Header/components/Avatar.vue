@@ -59,8 +59,8 @@ const logout = () => {
 const infoRef = ref<InstanceType<typeof InfoDialog> | null>(null);
 const passwordRef = ref<InstanceType<typeof PasswordDialog> | null>(null);
 const openDialog = (ref: string) => {
-  if (ref == "infoRef") infoRef.value?.openDialog();
-  if (ref == "passwordRef") passwordRef.value?.openDialog();
+  if (ref == "infoRef") console.log("个人信息");
+  if (ref == "passwordRef") console.log("密码修改");
 };
 </script>
 

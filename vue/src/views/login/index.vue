@@ -7,7 +7,7 @@
       </div>
       <div class="login-form">
         <div class="login-logo">
-          <img class="login-icon" src="@/assets/images/logo.svg" alt="" />
+          <img class="login-icon" src="@/assets/images/logo_eyes.png" alt="" />
           <h2 class="logo-text">眼震诊疗平台</h2>
         </div>
         <RouterView></RouterView>
