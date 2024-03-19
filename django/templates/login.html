@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录界面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            margin: 10;
+            padding: 10;
+        }
+        form {
+            background-color: #fff;
+            width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #007BFF;
+        }
+        label {
+            display: block;
+            text-align: left;
+            margin: 10px 0;
+            font-weight: bold;
+
+        }
+        input {
+            width: 75%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            margin-left: 10px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="POST" action="/login/">
+        {% csrf_token %}
+        <h1>登录</h1>
+        <label for="phone_number">用户名:</label>
+        <input type="text" name="phone_number" id="phone_number" />
+        <label for="password">密码:</label>
+        <input type="password" name="password" id="password" />
+        <label for="password">邀请码:</label>
+        <input type="text" name="Invitation_code" id="password" />
+        <br>
+        <button type="submit">登录</button>
+        <a href="/reg/">注册新用户</a>
+        {{ msg }}
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>已发表文章</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h2 {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .login-button {
+            position: absolute;
+            top: 20px;
+            right: 120px;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .my-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .logout-button {
+            position: absolute;
+            top: 20px;
+            right: 50px;
+            background-color: #ff0000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;/
+}
+
+.logout-button:hover {
+    background-color: #FF4500; /* 鼠标悬停时，按钮颜色变深 */
+}
+
+    </style>
+</head>
+<body>
+    <a href="/login/" class="login-button">登录</a>
+    <a href="{% url 'logout' %}" class="logout-button">退出</a>
+    <a href="/user_articles/" class="my-button">我的文章</a>
+    <h2>已发表文章</h2>
+    <ul>
+        {% for article in articles %}
+            <li>
+                <a href="{% url 'view_article' article.id %}">{{ article.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

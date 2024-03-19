@@ -17,5 +17,6 @@
             "command": "extension.execute",
             "priority": 4
         }
-    ]
+    ],
+    "TConda.name": "eye_dashboard"
 }
