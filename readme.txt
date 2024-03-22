@@ -13,3 +13,27 @@
 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
 node.js版本：v20.11.1
 npm 版本:10.2.4
+
+
+vue部署:
+安装nvm管理
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+重启终端（新建一个终端）
+
+输入nvm -v查看是否安装
+
+安装nodejs 20
+nvm install 20
+
+设置默认版本
+nvm alias default 20.11.1
+
+安装pnpm
+npm install -g pnpm
+
+安装依赖
+pnpm install
+
+开启
+pnpm run dev
