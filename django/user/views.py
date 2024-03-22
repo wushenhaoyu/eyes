@@ -11,8 +11,8 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.views.generic.base import View
 import requests
-from qcloudsms_py import SmsSingleSender
-from qcloudsms_py.httpclient import HTTPError
+# from qcloudsms_py import SmsSingleSender
+# from qcloudsms_py.httpclient import HTTPError
 import json
 import random
 import string
@@ -113,16 +113,24 @@ def post_email(request):
             context = {
                  'code': str(code)
                 }
+            print(1)           
+            print(code)     
             email_template_name = 'email.html'     
+            print(2) 
             t = loader.get_template(email_template_name)
+            print(3) 
             html_content = t.render(context)
+            print(4) 
             msg = EmailMessage(email_title, 
                     html_content, 
                     settings.EMAIL_HOST_USER,
                     [email],  # 这里可以同时发给多个收件人
                     )  
+            print(5)
             msg.content_subtype = 'html'
-            send_status = msg.send()
+            print(6)
+            # send_status = msg.send()
+            print(7)
             print("发送邮件成功!")
             return JsonResponse({'message': '请求成功'}, status=200)
         else:
