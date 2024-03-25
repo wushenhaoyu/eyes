@@ -45,7 +45,9 @@
   </el-form>
   <div class="login-btn">
     <el-button :icon="CircleClose" round size="large" @click="login"> 登录 </el-button>
-    <el-button :icon="UserFilled" round size="large" type="primary" :loading="loading" @click="register"> 注册 </el-button>
+    <el-button :icon="UserFilled" round size="large" type="primary" :loading="loading" @click="register(registerFormRef)">
+      注册
+    </el-button>
   </div>
 </template>
 
@@ -54,9 +56,10 @@ import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { Register } from "@/api/interface";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
-import { LOGIN } from "@/config";
-import type { ElForm } from "element-plus";
-import { registerApi } from "@/api/modules/login";
+import { ElNotification, type ElForm } from "element-plus";
+import { emailApi, registerApi } from "@/api/modules/login";
+import { getTimeState } from "@/utils";
+import md5 from "md5";
 
 const router = useRouter();
 
@@ -85,11 +88,10 @@ const register = (formEl: FormInstance | undefined) => {
     loading.value = true;
     try {
       // 1.执行登录接口
-      const { data } = await registerApi({ ...registerForm, password: md5(registerForm.password) });
-
+      const data = await registerApi({ ...registerForm, password: md5(registerForm.password) });
       console.log(data);
       // 4.跳转到首页
-      router.push(LOGIN);
+      router.push("login");
       ElNotification({
         title: getTimeState(),
         message: "注册成功！",
@@ -107,7 +109,8 @@ const login = () => {
 };
 
 const getVer = () => {
-  console.log("获取验证码");
+  let email = registerForm.username;
+  emailApi({ email: email });
 };
 // resetForm
 /*const resetForm = (formEl: FormInstance | undefined) => {

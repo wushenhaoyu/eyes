@@ -37,7 +37,9 @@ export namespace Login {
     password: string;
   }
   export interface ResLogin {
+    message: string;
     access_token: string;
+    success: number;
   }
   export interface ResAuthButtons {
     [key: string]: string[];
@@ -53,6 +55,9 @@ export namespace Register {
   export interface ResRegister {
     message: string;
     success: number;
+  }
+  export interface RegisterEmail {
+    email: string;
   }
 }
 
@@ -77,8 +82,6 @@ export namespace User {
     address: string;
     createTime: string;
     status: number;
-    avatar: string;
-    photo: any[];
     children?: ResUserList[];
   }
   export interface ResStatus {

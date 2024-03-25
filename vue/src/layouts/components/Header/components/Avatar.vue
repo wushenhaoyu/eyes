@@ -44,7 +44,7 @@ const logout = () => {
     type: "warning"
   }).then(async () => {
     // 1.执行退出登录接口
-    await logoutApi();
+    
 
     // 2.清除 Token
     userStore.setToken("");

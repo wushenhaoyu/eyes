@@ -10,6 +10,16 @@ export const getUserList = (params: User.ReqUserParams) => {
   return http.post<ResPage<User.ResUserList>>(PORT1 + `/user/list`, params);
 };
 
+//待诊用户列表
+export const getPatientWaittingList = (params: User.ReqUserParams) => {
+  return http.post<ResPage<User.ResUserList>>(PORT1 + `/getpatientwaittinglist`, params);
+};
+
+//已经诊断用户列表
+export const getPatientHistroyList = (params: User.ReqUserParams) => {
+  return http.post<ResPage<User.ResUserList>>(PORT1 + `/getpatienthistorylist`, params);
+};
+
 // 获取树形用户列表
 export const getUserTreeList = (params: User.ReqUserParams) => {
   return http.post<ResPage<User.ResUserList>>(PORT1 + `/user/tree/list`, params);
