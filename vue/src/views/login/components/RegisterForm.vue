@@ -84,6 +84,12 @@ const registerForm = reactive<Register.ReqRegisterForm>({
 // login
 const hospitalRegister = () =>{
   console.log('hospital')
+  ElNotification({
+        title: '注意',
+        message: "注册医院请填写完整以满足通过标准",
+        type: "warning",
+        duration: 5000
+      });
   router.push("/login/registerhospital");
 }
 

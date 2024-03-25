@@ -57,6 +57,7 @@ export namespace Register {
     name: string;
     photo:[{name: string, url:string}]
     verificationCode: string;
+    location: [string,string,string];
   }
   export interface ResRegister {
     message: string;

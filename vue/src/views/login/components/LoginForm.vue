@@ -110,6 +110,12 @@ const login = (formEl: FormInstance | undefined) => {
   formEl.resetFields();
 };*/
 const register = () => {
+  ElNotification({
+        title: '注意',
+        message: "医院认证码请向本院管理员询问",
+        type: "warning",
+        duration: 5000
+      });
   router.push("login/register");
 };
 

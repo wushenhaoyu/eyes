@@ -1,6 +1,6 @@
 <template>
   <el-form ref="registerFormRef" :model="registerForm" :rules="loginRules" size="large">
-    <el-form-item prop="username">
+    <el-form-item prop="email">
       <el-input v-model="registerForm.email" placeholder="输入医院绑定邮箱" type="email">
         <template #prefix>
           <el-icon class="el-input__icon">
@@ -9,7 +9,7 @@
         </template>
       </el-input>
     </el-form-item>
-    <el-form-item prop="username">
+    <el-form-item prop="name">
       <el-input v-model="registerForm.name" placeholder="输入医院名称" type="email">
         <template #prefix>
           <el-icon class="el-input__icon">
@@ -18,7 +18,7 @@
         </template>
       </el-input>
     </el-form-item>
-    <el-form-item prop="photo">
+    <el-form-item >
     <UploadImgs v-model:file-list="registerForm.photo" :limit="3" height="90px" width="90px" border-radius="50%">
               <template #empty>
                 <el-icon><Picture /></el-icon>
@@ -26,6 +26,14 @@
               </template>
             </UploadImgs>
           </el-form-item>
+          <el-form-item prop="location">          
+              <el-cascader
+              style="width: 100%;"
+            size="large"
+            :options="pcaTextArr"
+            v-model="registerForm.location">
+          </el-cascader>
+  </el-form-item>
     <el-form-item prop="verificationCode">
       <el-input
         style="width: 55%; margin-right: 5%"
@@ -52,6 +60,13 @@
 </template>
 
 <script setup lang="ts">
+import {
+  provinceAndCityData,
+  pcTextArr,
+  regionData,
+  pcaTextArr,
+  codeToText,
+} from "element-china-area-data";
 import UploadImgs from "@/components/Upload/Imgs.vue";
 import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
@@ -62,6 +77,9 @@ import { emailApi, registerApi } from "@/api/modules/login";
 import { getTimeState } from "@/utils";
 import md5 from "md5";
 
+
+const options = regionData;
+      
 const router = useRouter();
 
 /*const fromModel = ref({
@@ -72,13 +90,15 @@ const router = useRouter();
   email: ""
 });*/
 
+
 type FormInstance = InstanceType<typeof ElForm>;
 const registerFormRef = ref<FormInstance>();
 const loginRules = reactive({
-  username: [{ required: true, message: "请输入医院绑定邮箱", trigger: "blur" }],
+  email: [{ required: true, message: "请输入医院绑定邮箱", trigger: "blur" }],
   name: [{ required: true, message: "请输入医院名称", trigger: "blur" }],
   verificationCode: [{ required: true, message: "请输入邮箱验证码", trigger: "blur" }],
-  photo:[{ required: true, message: "上传医院资质证明", trigger: "blur" }]
+  photo:[{ required: true, message: "上传医院资质证明", trigger: "blur" }],
+  location:[{ required: true, message: "选择医院所在地区", trigger: "blur" }]
 });
 
 const loading = ref(false);
@@ -86,11 +106,12 @@ const registerForm = reactive<Register.ReqRegisterHospitalForm>({
   email: "",
   name:"",
   verificationCode: "",
-  photo:[]
+  photo:[{name:'',url:''}],
+  location:["","",""]
 });
 
 const register = () =>{
-  console.log('hospital') 
+  console.log(registerForm)
   router.push("/login/register");
 }
 
@@ -123,7 +144,7 @@ const login = () => {
 };
 
 const getVer = () => {
-  let email = registerForm.username;
+  let email = registerForm.email;
   emailApi({ email: email });
 };
 // resetForm
@@ -146,4 +167,8 @@ onMounted(() => {
 
 <style scoped lang="scss">
 @import "../index.scss";
+.el-form-item {
+  display: flex;
+  justify-content: center;
+      }
 </style>
