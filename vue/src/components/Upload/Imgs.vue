@@ -125,13 +125,13 @@ const beforeUpload: UploadProps["beforeUpload"] = rawFile => {
 const handleHttpUpload = async (options: UploadRequestOptions) => {
   let formData = new FormData();
   formData.append("file", options.file);
-  try {
+  /*try {
     const api = props.api ?? uploadImg;
     const { data } = await api(formData);
     options.onSuccess(data);
   } catch (error) {
     options.onError(error as any);
-  }
+  }*/
 };
 
 /**

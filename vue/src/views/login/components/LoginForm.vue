@@ -71,6 +71,16 @@ const login = (formEl: FormInstance | undefined) => {
       // 1.执行登录接口
       const data = await loginApi({ ...loginForm, password: md5(loginForm.password) });
       console.log(data);
+      /*if (!data.success) {
+        ElNotification({
+        title: getTimeState(),
+        message: "账号或密码错误",
+        type: "error",
+        duration: 3000
+      });
+    
+        return
+      }*/
       userStore.setToken(data.access_token);
 
       // 2.添加动态路由

@@ -1,7 +1,7 @@
 <template>
   <el-form ref="registerFormRef" :model="registerForm" :rules="loginRules" size="large">
     <el-form-item prop="username">
-      <el-input v-model="registerForm.username" placeholder="输入邮箱" type="email">
+      <el-input v-model="registerForm.email" placeholder="输入医院绑定邮箱" type="email">
         <template #prefix>
           <el-icon class="el-input__icon">
             <user />
@@ -9,24 +9,23 @@
         </template>
       </el-input>
     </el-form-item>
-    <el-form-item prop="password">
-      <el-input v-model="registerForm.password" type="password" placeholder="输入密码" show-password>
+    <el-form-item prop="username">
+      <el-input v-model="registerForm.name" placeholder="输入医院名称" type="email">
         <template #prefix>
           <el-icon class="el-input__icon">
-            <lock />
+            <user />
           </el-icon>
         </template>
       </el-input>
     </el-form-item>
-    <el-form-item prop="authCode">
-      <el-input v-model="registerForm.authCode" type="password" placeholder="输入医院认证码" show-password>
-        <template #prefix>
-          <el-icon class="el-input__icon">
-            <lock />
-          </el-icon>
-        </template>
-      </el-input>
-    </el-form-item>
+    <el-form-item prop="photo">
+    <UploadImgs v-model:file-list="registerForm.photo" :limit="3" height="90px" width="90px" border-radius="50%">
+              <template #empty>
+                <el-icon><Picture /></el-icon>
+                <span>医院资质证明</span>
+              </template>
+            </UploadImgs>
+          </el-form-item>
     <el-form-item prop="verificationCode">
       <el-input
         style="width: 55%; margin-right: 5%"
@@ -45,14 +44,15 @@
   </el-form>
   <div class="login-btn">
     <el-button :icon="CircleClose" round size="large" @click="login"> 登录 </el-button>
-    <el-button :icon="UserFilled" round size="large" type="primary" :loading="loading" @click="register(registerFormRef)">
+    <el-button :icon="UserFilled" round size="large" type="primary" :loading="loading" @click="registerhospital(registerFormRef)">
       注册
     </el-button>
   </div>
-  <div style="display: flex;justify-content: end;"><el-link type="primary" @click="hospitalRegister">注册医院？</el-link></div>
+  <div style="display: flex;justify-content: end;"><el-link type="primary" @click="register">注册医生？</el-link></div>
 </template>
 
 <script setup lang="ts">
+import UploadImgs from "@/components/Upload/Imgs.vue";
 import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { Register } from "@/api/interface";
@@ -64,37 +64,45 @@ import md5 from "md5";
 
 const router = useRouter();
 
+/*const fromModel = ref({
+  avatar: "",
+  photo: [{ name: "img", url: "https://i.imgtg.com/2023/01/16/QR57a.jpg" }],
+  username: "",
+  idCard: "",
+  email: ""
+});*/
+
 type FormInstance = InstanceType<typeof ElForm>;
 const registerFormRef = ref<FormInstance>();
 const loginRules = reactive({
-  username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-  password: [{ required: true, message: "请输入密码", trigger: "blur" }],
-  authCode: [{ required: true, message: "请输入医院认证码", trigger: "blur" }],
-  verificationCode: [{ required: true, message: "请输入邮箱验证码", trigger: "blur" }]
+  username: [{ required: true, message: "请输入医院绑定邮箱", trigger: "blur" }],
+  name: [{ required: true, message: "请输入医院名称", trigger: "blur" }],
+  verificationCode: [{ required: true, message: "请输入邮箱验证码", trigger: "blur" }],
+  photo:[{ required: true, message: "上传医院资质证明", trigger: "blur" }]
 });
 
 const loading = ref(false);
-const registerForm = reactive<Register.ReqRegisterForm>({
-  username: "",
-  password: "",
-  authCode: "",
-  verificationCode: ""
+const registerForm = reactive<Register.ReqRegisterHospitalForm>({
+  email: "",
+  name:"",
+  verificationCode: "",
+  photo:[]
 });
 
-// login
-const hospitalRegister = () =>{
-  console.log('hospital')
-  router.push("/login/registerhospital");
+const register = () =>{
+  console.log('hospital') 
+  router.push("/login/register");
 }
 
-const register = (formEl: FormInstance | undefined) => {
+// login
+const registerhospital = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate(async valid => {
     if (!valid) return;
     loading.value = true;
     try {
       // 1.执行登录接口
-      const data = await registerApi({ ...registerForm, password: md5(registerForm.password) });
+      //const data = await registerApi({ ...registerForm, password: md5(registerForm.password) });
       console.log(data);
       // 4.跳转到首页
       ElNotification({
@@ -104,8 +112,8 @@ const register = (formEl: FormInstance | undefined) => {
         duration: 3000
       });
     } finally {
-      router.push("login");
       loading.value = false;
+      router.push("login");
     }
   });
 };

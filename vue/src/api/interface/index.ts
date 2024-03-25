@@ -52,6 +52,12 @@ export namespace Register {
     authCode: string;
     verificationCode: string;
   }
+  export interface ReqRegisterHospitalForm {
+    email: string;
+    name: string;
+    photo:[{name: string, url:string}]
+    verificationCode: string;
+  }
   export interface ResRegister {
     message: string;
     success: number;

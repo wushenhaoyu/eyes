@@ -17,7 +17,6 @@
 </template>
 
 <script setup lang="ts" name="login">
-//import LoginForm from "./components/LoginForm.vue";
 import SwitchDark from "@/components/SwitchDark/index.vue";
 import { RouterView } from "vue-router";
 </script>
