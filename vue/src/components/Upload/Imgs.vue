@@ -123,7 +123,7 @@ const beforeUpload: UploadProps["beforeUpload"] = rawFile => {
  * @param options upload 所有配置项
  * */
 const handleHttpUpload = async (options: UploadRequestOptions) => {
-  console.log('上传图片')
+  
   /*let formData = new FormData();
   formData.append("file", options.file);
   try {

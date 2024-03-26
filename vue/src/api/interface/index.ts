@@ -55,7 +55,7 @@ export namespace Register {
   export interface ReqRegisterHospitalForm {
     email: string;
     name: string;
-    photo:[{name: string, url:string}]
+    photo:any;
     verificationCode: string;
     location: [string,string,string];
   }

@@ -19,12 +19,24 @@
       </el-input>
     </el-form-item>
     <el-form-item >
-    <UploadImgs v-model:file-list="registerForm.photo" :limit="3" height="90px" width="90px" border-radius="50%">
-              <template #empty>
-                <el-icon><Picture /></el-icon>
-                <span>医院资质证明</span>
-              </template>
-            </UploadImgs>
+      
+  <el-form-item>
+    <el-upload
+      class="custom-uploader"
+      ref="uploadRef"
+      list-type="picture-card"
+      :file-list="registerForm.photo"
+      :on-success="handleAvatarSuccess"
+      :on-remove="handleRemove"
+      :on-change="handleChange"
+      :auto-upload="false"
+      :limit="1"
+    >
+      <i v-if="registerForm.photo.length < 1" class="el-icon-plus uploader-icon"></i>
+      <div slot="tip" class="el-upload__tip">请上传医院证明</div>
+    </el-upload>
+  </el-form-item>
+        
           </el-form-item>
           <el-form-item prop="location">          
               <el-cascader
@@ -74,6 +86,7 @@ import { Register } from "@/api/interface";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import { ElNotification, type ElForm } from "element-plus";
 import { emailApi, registerApi } from "@/api/modules/login";
+import { registerHospital } from "@/api/modules/upload";
 import { getTimeState } from "@/utils";
 import md5 from "md5";
 
@@ -106,7 +119,7 @@ const registerForm = reactive<Register.ReqRegisterHospitalForm>({
   email: "",
   name:"",
   verificationCode: "",
-  photo:[{name:'',url:''}],
+  photo:null,
   location:["","",""]
 });
 
@@ -115,8 +128,41 @@ const register = () =>{
   router.push("/login/register");
 }
 
+const uploadRef = ref();
+
+/*const beforeUploadHandler = (file) => {
+  if (registerForm.photo.length >= 3) {
+    ElNotification({
+      title: getTimeState(),
+      message: "只能传三个文件！",
+      type: "warning",
+      duration: 3000
+    });
+    return false;
+  }
+  registerForm.photo.push({ name: file.name, url: URL.createObjectURL(file.raw) });
+  console.log(registerForm.photo)
+  return false; // prevent file from being automatically uploaded 
+};*/
+
+
+const handleAvatarSuccess = (res, file) => { console.log(res,file)};
+
+const handleChange = (file, fileList) => {
+            registerForm.photo.push(file);
+            console.log(registerForm.photo,file)
+    };
+
+const handleRemove = (file, fileList) => {
+  console.log(file)
+  registerForm.photo = fileList.map( ({ name, url }) => ({ name, url }) );
+};
+
+
+
 // login
 const registerhospital = (formEl: FormInstance | undefined) => {
+  console.log(registerForm)
   if (!formEl) return;
   formEl.validate(async valid => {
     if (!valid) return;
@@ -124,6 +170,7 @@ const registerhospital = (formEl: FormInstance | undefined) => {
     try {
       // 1.执行登录接口
       //const data = await registerApi({ ...registerForm, password: md5(registerForm.password) });
+      const data = await registerHospital(registerForm.photo.raw,registerForm.email,registerForm.name,registerForm.location)
       console.log(data);
       // 4.跳转到首页
       ElNotification({
@@ -171,4 +218,14 @@ onMounted(() => {
   display: flex;
   justify-content: center;
       }
+.custom-uploader .el-upload-list-item {
+  width: 80px;
+  height: 80px;
+}
+
+/* adjust the size of the upload button */
+.custom-uploader .el-upload-list-item.is-ready .el-upload-list-item__thumbnail {
+  width: 80px;
+  height: 80px;
+}
 </style>
