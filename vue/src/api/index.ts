@@ -117,13 +117,15 @@ class RequestHttp {
 
   upload(url: string, file: File, params?: object, config: AxiosRequestConfig = {}): Promise<any> {
     let formData = new FormData();
+    console.log(file,params)
     formData.append("file", file);
   
     // 添加额外的参数
     for (let key in params) {
       formData.append(key, params[key]);
     }
-  
+    console.log(formData.has('file'));
+    console.log(formData.get('file'));
     return this.service.post(url, formData, {
       ...config,
       headers: {

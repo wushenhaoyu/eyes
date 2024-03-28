@@ -119,7 +119,7 @@ const registerForm = reactive<Register.ReqRegisterHospitalForm>({
   email: "",
   name:"",
   verificationCode: "",
-  photo:null,
+  photo:[],
   location:["","",""]
 });
 
@@ -170,8 +170,7 @@ const registerhospital = (formEl: FormInstance | undefined) => {
     try {
       // 1.执行登录接口
       //const data = await registerApi({ ...registerForm, password: md5(registerForm.password) });
-      const data = await registerHospital(registerForm.photo.raw,registerForm.email,registerForm.name,registerForm.location)
-      console.log(data);
+      const data = await registerHospital(registerForm.photo[0].raw,registerForm.email,registerForm.name,registerForm.location)
       // 4.跳转到首页
       ElNotification({
         title: getTimeState(),

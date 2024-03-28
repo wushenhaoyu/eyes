@@ -9,14 +9,13 @@ import { AxiosRequestConfig } from "axios";
 // 图片上传
 // 图片上传
 export const registerHospital = (file: File, email: string, name: string, location: [string,string,string]) => {
-  let formData = new FormData();
-  formData.append('image', file);
-  formData.append('email', email);
-  formData.append('name', name);
-  let locationStr = JSON.stringify(location);
-  formData.append('location', locationStr);
-
-  return http.upload(PORT1 + '/file/upload/img', formData, {}, { cancel: false });
+  let params = {
+    email,
+    name,
+    location: JSON.stringify(location),
+  };
+  console.log(file)
+  return http.upload(PORT1 + '/hospital', file, params, {});
 };
 
 // 视频上传

@@ -230,7 +230,7 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
       el: "date-picker",
       span: 2,
       props: { type: "datetimerange", valueFormat: "YYYY-MM-DD HH:mm:ss" },
-      defaultValue: ["2022-11-12 11:35:00", "2022-12-12 11:35:00"]
+      defaultValue: ["2022-11-12 11:35:00", "2024-12-12 11:35:00"]
     }
   },
   { prop: "operation", label: "操作", fixed: "right", width: 120 }
