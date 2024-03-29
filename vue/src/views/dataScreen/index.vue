@@ -7,7 +7,7 @@
         </div>
         <div class="header-ct">
           <div class="header-ct-title">
-            <span>智慧旅游可视化大数据展示平台</span>
+            <span>慧眼识珠可视化大数据展示平台</span>
             <div class="header-ct-warning">平台高峰预警信息（2条）</div>
           </div>
         </div>
@@ -20,7 +20,7 @@
         <div class="dataScreen-lf">
           <div class="dataScreen-top">
             <div class="dataScreen-main-title">
-              <span>实时游客统计</span>
+              <span>实时诊疗患者统计</span>
               <img src="./images/dataScreen-title.png" alt="" />
             </div>
             <div class="dataScreen-main-chart">
@@ -29,7 +29,7 @@
           </div>
           <div class="dataScreen-center">
             <div class="dataScreen-main-title">
-              <span>男女比例</span>
+              <span>患者性别比例</span>
               <img src="./images/dataScreen-title.png" alt="" />
             </div>
             <div class="dataScreen-main-chart">
@@ -38,7 +38,7 @@
           </div>
           <div class="dataScreen-bottom">
             <div class="dataScreen-main-title">
-              <span>年龄比例</span>
+              <span>患者年龄比例</span>
               <img src="./images/dataScreen-title.png" alt="" />
             </div>
             <div class="dataScreen-main-chart">
@@ -48,7 +48,7 @@
         </div>
         <div class="dataScreen-ct">
           <div class="dataScreen-map">
-            <div class="dataScreen-map-title">景区实时客流量</div>
+            <div class="dataScreen-map-title">全国实时诊疗量</div>
             <!-- <vue3-seamless-scroll
 							:list="alarmData"
 							class="dataScreen-alarm"
@@ -67,7 +67,7 @@
           </div>
           <div class="dataScreen-cb">
             <div class="dataScreen-main-title">
-              <span>未来30天游客量趋势图</span>
+              <span>过去30天诊疗量趋势图</span>
               <img src="./images/dataScreen-title.png" alt="" />
             </div>
             <div class="dataScreen-main-chart">
@@ -78,7 +78,7 @@
         <div class="dataScreen-rg">
           <div class="dataScreen-top">
             <div class="dataScreen-main-title">
-              <span>热门景区排行</span>
+              <span>热门医院排行</span>
               <img src="./images/dataScreen-title.png" alt="" />
             </div>
             <div class="dataScreen-main-chart">
@@ -87,7 +87,7 @@
           </div>
           <div class="dataScreen-center">
             <div class="dataScreen-main-title">
-              <span>年度游客量对比</span>
+              <span>年度诊疗量对比</span>
               <img src="./images/dataScreen-title.png" alt="" />
             </div>
             <div class="dataScreen-main-chart">

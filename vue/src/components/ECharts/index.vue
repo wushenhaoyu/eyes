@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const echartsStyle = computed(() => {
   return props.width || props.height
-    ? { height: props.height + "px", width: props.width + "px" }
+    ? { height: props.height + "%", width: props.width + "%" }
     : { height: "100%", width: "100%" };
 });
 

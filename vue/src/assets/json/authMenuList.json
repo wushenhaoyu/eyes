@@ -136,9 +136,9 @@
           }
         },
         {
-          "path": "/proTable/patientPast",
-          "name": "patientPast",
-          "component": "/proTable/patientPast/index",
+          "path": "/lib",
+          "name": "lib",
+          "component": "/dataScreen/lib/index",
           "meta": {
             "icon": "TrendCharts",
             "title": "全国眼震数据",
@@ -147,31 +147,14 @@
             "isFull": false,
             "isAffix": false,
             "isKeepAlive": true
-          },
-          "children": [
-            {
-              "path": "/proTable/patientPast/detail/:id",
-              "name": "patientPastDetail",
-              "component": "/proTable/patientPast/detail",
-              "meta": {
-                "icon": "Menu",
-                "title": "ProTable 详情",
-                "activeMenu": "/proTable/patientPast",
-                "isLink": "",
-                "isHide": true,
-                "isFull": false,
-                "isAffix": false,
-                "isKeepAlive": true
-              }
-            }
-          ]
+          }
         }
       ]
     },
     {
-      "path": "/link/bing",
-      "name": "bing",
-      "component": "/link/bing/index",
+      "path": "/assembly/about",
+      "name": "about",
+      "component": "/assembly/batchImport/index",
       "meta": {
         "icon": "Briefcase",
         "title": "关于平台",

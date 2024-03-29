@@ -79,7 +79,7 @@ import { useDownload } from "@/hooks/useDownload";
 /*import { useAuthButtons } from "@/hooks/useAuthButtons";*/
 import ProTable from "@/components/ProTable/index.vue";
 import ImportExcel from "@/components/ImportExcel/index.vue";
-import UserDrawer from "@/views/proTable/components/UserDrawer.vue";
+import UserDrawer from "@/views/dataScreen/lib/UserDrawer.vue";
 import { ProTableInstance, ColumnProps, HeaderRenderScope } from "@/components/ProTable/interface";
 import { CirclePlus, Delete, Download, Upload, View } from "@element-plus/icons-vue";
 import {
