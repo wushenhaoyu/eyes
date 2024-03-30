@@ -111,4 +111,14 @@ export namespace User {
     name: string;
     children?: ResDepartment[];
   }
+  export interface advice{
+    username: string;
+    gender: number;
+    idCard: string;
+    email: string;
+    address: string;
+    createTime: string[];
+    status: number;
+    
+  }
 }

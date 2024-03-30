@@ -59,7 +59,7 @@
         <el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
       </template>
     </ProTable>
-    <UserDrawer ref="drawerRef" />
+    <UserDrawer1 ref="drawerRef" />
 
     <template #footer>
       <el-button @click="drawerVisible = false">取消</el-button>
@@ -92,7 +92,8 @@ import {
   exportUserInfo,
   BatchAddUser,
   // getUserStatus,
-  getUserGender
+  getUserGender,
+getPatientHistroyList
 } from "@/api/modules/user";
 //import UploadImg from "@/components/Upload/Img.vue";
 //import UploadImgs from "@/components/Upload/Imgs.vue";
@@ -167,7 +168,7 @@ const getTableList = (params: any) => {
   // Assuming drawerProps.value.row is also an object
   let completeParams = {...newParams, ...drawerProps.value.row};
 
-  return getUserList(completeParams);
+  return getPatientHistroyList(completeParams);
 };
 
 const router = useRouter();

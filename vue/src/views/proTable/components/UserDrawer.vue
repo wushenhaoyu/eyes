@@ -1,6 +1,7 @@
 <template>
   <el-drawer v-model="drawerVisible" :destroy-on-close="true" size="80vw" :title="`${drawerProps.title}用户`">
-    <div style="width: 20vw">
+    <div style="display: flex;">
+    <div style="width: 30vw">
       <el-form
         ref="ruleFormRef"
         label-width="100px"
@@ -29,7 +30,7 @@
         </UploadImgs>
       </el-form-item>-->
         <el-form-item label="用户姓名" prop="username">
-          <el-input v-model="drawerProps.row!.username" placeholder="请填写用户姓名" clearable></el-input>
+          <el-input  v-model="drawerProps.row!.username" placeholder="请填写用户姓名" clearable></el-input>
         </el-form-item>
         <el-form-item label="性别" prop="gender">
           <el-select v-model="drawerProps.row!.gender" placeholder="请选择性别" clearable>
@@ -47,6 +48,40 @@
         </el-form-item>
       </el-form>
     </div>
+    <div>
+      <video-player
+      style="width: 25vw;height: 100%;"
+    src="https://www.nwpu.space/video/oceans.mp4/"
+    poster=""
+    :controls="true"
+    :autoplay="true"
+    :loop="true"
+    :volume="0.6"
+  />
+    </div>
+    
+    <div>
+      <img style="height: 100%;width: 25vw;" src="https://th.bing.com/th/id/R.5643b96fa77e23eba0f9e85fb99a8767?rik=WoXS2sLSaLYnyw&riu=http%3a%2f%2fnwzimg.wezhan.cn%2fcontents%2fsitefiles2021%2f10106186%2fimages%2f3190146.jpg&ehk=ExjNPXuSD7nAOauLtLJyFqxinw6jfjI%2flNwmoTwSt9M%3d&risl=&pid=ImgRaw&r=0">
+    </div>
+  </div>
+    <div><el-form
+        label-width="100px"
+        label-suffix=" :"
+        :rules="rules"
+        :model="drawerProps.row"
+        :hide-required-asterisk="drawerProps.isView"
+      >
+      <el-form-item label="医生评价">
+          <el-input
+    v-model="textarea1"
+    style="width: 100vw;margin-bottom: 20px;"
+    :rows="5"
+    type="textarea"
+    placeholder="Please input"
+  />
+        </el-form-item>
+    </el-form></div>
+    
     <ProTable
       ref="proTable"
       :columns="columns"
@@ -63,7 +98,7 @@
 
     <template #footer>
       <el-button @click="drawerVisible = false">取消</el-button>
-      <el-button v-show="!drawerProps.isView" type="primary" @click="handleSubmit">确定</el-button>
+      <el-button type="primary" @click="handleSubmit">提交</el-button>
     </template>
   </el-drawer>
 </template>
@@ -71,7 +106,7 @@
 <script setup lang="ts" name="UserDrawer">
 import { ref, reactive } from "vue";
 import { genderType } from "@/utils/dict";
-import { ElMessage, FormInstance,ElMessageBox  } from "element-plus";
+import { ElMessage, FormInstance,ElMessageBox, ElNotification  } from "element-plus";
 import { User } from "@/api/interface";
 import { useRouter } from "vue-router";
 import { useHandleData } from "@/hooks/useHandleData";
@@ -87,15 +122,20 @@ import {
   deleteUser,
   editUser,
   addUser,
+  advice,
   //changeUserStatus,
   //resetUserPassWord,
   exportUserInfo,
   BatchAddUser,
   // getUserStatus,
-  getUserGender
+  getUserGender,
+getPatientHistroyList
 } from "@/api/modules/user";
+import { VideoPlayer } from '@videojs-player/vue'
+import 'video.js/dist/video-js.css'
 //import UploadImg from "@/components/Upload/Img.vue";
 //import UploadImgs from "@/components/Upload/Imgs.vue";
+const textarea1 = ref('')
 
 const rules = reactive({
   avatar: [{ required: true, message: "请上传用户头像" }],
@@ -130,18 +170,20 @@ const acceptParams = (params: DrawerProps) => {
 
 // 提交数据（新增/编辑）
 const ruleFormRef = ref<FormInstance>();
-const handleSubmit = () => {
-  ruleFormRef.value!.validate(async valid => {
-    if (!valid) return;
-    try {
-      await drawerProps.value.api!(drawerProps.value.row);
-      ElMessage.success({ message: `${drawerProps.value.title}用户成功！` });
-      drawerProps.value.getTableList!();
-      drawerVisible.value = false;
-    } catch (error) {
-      console.log(error);
-    }
-  });
+const handleSubmit = async (params: any) => {
+  console.log(textarea1.value)
+  let completeParams = {...drawerProps.value.row,advice:textarea1.value};
+  let data = await advice(completeParams);
+  if(data.success)
+  {
+    drawerVisible.value = false
+    ElNotification({
+        title: 'success',
+        message: "诊疗成功！",
+        type: "success",
+        duration: 3000
+      });
+  }
 };
 
 defineExpose({
@@ -167,7 +209,7 @@ const getTableList = (params: any) => {
   // Assuming drawerProps.value.row is also an object
   let completeParams = {...newParams, ...drawerProps.value.row};
 
-  return getUserList(completeParams);
+  return getPatientHistroyList(completeParams);
 };
 
 const router = useRouter();
