@@ -40,6 +40,7 @@ export namespace Login {
     message: string;
     access_token: string;
     success: number;
+    id:number;
   }
   export interface ResAuthButtons {
     [key: string]: string[];
@@ -50,6 +51,7 @@ export namespace Register {
     username: string;
     password: string;
     authCode: string;
+    name:string;
     verificationCode: string;
   }
   export interface ReqRegisterHospitalForm {

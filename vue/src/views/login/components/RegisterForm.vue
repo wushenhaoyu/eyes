@@ -1,5 +1,14 @@
 <template>
   <el-form ref="registerFormRef" :model="registerForm" :rules="loginRules" size="large">
+    <el-form-item prop="name">
+      <el-input v-model="registerForm.name" placeholder="输入您的姓名">
+        <template #prefix>
+          <el-icon class="el-input__icon">
+            <user />
+          </el-icon>
+        </template>
+      </el-input>
+    </el-form-item>
     <el-form-item prop="username">
       <el-input v-model="registerForm.username" placeholder="输入邮箱" type="email">
         <template #prefix>
@@ -61,6 +70,7 @@ import { ElNotification, type ElForm } from "element-plus";
 import { emailApi, registerApi } from "@/api/modules/login";
 import { getTimeState } from "@/utils";
 import md5 from "md5";
+import { el } from "element-plus/es/locale";
 
 const router = useRouter();
 
@@ -70,7 +80,8 @@ const loginRules = reactive({
   username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
   password: [{ required: true, message: "请输入密码", trigger: "blur" }],
   authCode: [{ required: true, message: "请输入医院认证码", trigger: "blur" }],
-  verificationCode: [{ required: true, message: "请输入邮箱验证码", trigger: "blur" }]
+  verificationCode: [{ required: true, message: "请输入邮箱验证码", trigger: "blur" }],
+  name: [{ required: true, message: "请输入您的姓名", trigger: "blur" }]
 });
 
 const loading = ref(false);
@@ -78,7 +89,8 @@ const registerForm = reactive<Register.ReqRegisterForm>({
   username: "",
   password: "",
   authCode: "",
-  verificationCode: ""
+  verificationCode: "",
+  name: ""
 });
 
 // login
@@ -101,16 +113,27 @@ const register = (formEl: FormInstance | undefined) => {
     try {
       // 1.执行登录接口
       const data = await registerApi({ ...registerForm, password: md5(registerForm.password) });
-      console.log(data);
-      // 4.跳转到首页
-      ElNotification({
+      console.log(data.success);
+      if (data.success) {
+        ElNotification({
         title: getTimeState(),
         message: "注册成功！",
         type: "success",
         duration: 3000
       });
+      setTimeout(()=>{
+        router.push("login");
+      },3000)
+      }
+      else{
+        ElNotification({
+        title: getTimeState(),
+        message: "注册失败！",
+        type: "error",
+        duration: 3000
+      });
+      }
     } finally {
-      router.push("login");
       loading.value = false;
     }
   });

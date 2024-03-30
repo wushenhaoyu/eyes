@@ -59,7 +59,7 @@
         <el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
       </template>
     </ProTable>
-    <UserDrawer ref="drawerRef" />
+    <UserDrawer1 ref="drawerRef" />
 
     <template #footer>
       <el-button @click="drawerVisible = false">取消</el-button>
@@ -79,7 +79,7 @@ import { useDownload } from "@/hooks/useDownload";
 /*import { useAuthButtons } from "@/hooks/useAuthButtons";*/
 import ProTable from "@/components/ProTable/index.vue";
 import ImportExcel from "@/components/ImportExcel/index.vue";
-import UserDrawer from "@/views/proTable/components/UserDrawer.vue";
+import UserDrawer1 from "@/views/proTable/components/UserDrawer1.vue";
 import { ProTableInstance, ColumnProps, HeaderRenderScope } from "@/components/ProTable/interface";
 import { CirclePlus, Delete, Download, Upload, View } from "@element-plus/icons-vue";
 import {
@@ -266,7 +266,7 @@ const sortTable = ({ newIndex, oldIndex }: { newIndex?: number; oldIndex?: numbe
   ElMessage.success("修改列表排序成功");
 };
 
-const drawerRef = ref<InstanceType<typeof UserDrawer> | null>(null);
+const drawerRef = ref<InstanceType<typeof UserDrawer1> | null>(null);
 const openDrawer = (title: string, row: Partial<User.ResUserList> = {}) => {
   const params = {
     title,

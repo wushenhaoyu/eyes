@@ -71,7 +71,7 @@ const login = (formEl: FormInstance | undefined) => {
       // 1.执行登录接口
       const data = await loginApi({ ...loginForm, password: md5(loginForm.password) });
       console.log(data);
-      /*if (!data.success) {
+      if (!data.success) {
         ElNotification({
         title: getTimeState(),
         message: "账号或密码错误",
@@ -80,8 +80,10 @@ const login = (formEl: FormInstance | undefined) => {
       });
     
         return
-      }*/
+      }
       userStore.setToken(data.access_token);
+      userStore.$id = data.id;
+      userStore.setUserInfo({name:data.name})
 
       // 2.添加动态路由
       await initDynamicRouter();
@@ -94,7 +96,7 @@ const login = (formEl: FormInstance | undefined) => {
       router.push(HOME_URL);
       ElNotification({
         title: getTimeState(),
-        message: "欢迎登录 Geeker-Admin",
+        message: "欢迎登录 "+userStore.userInfo.name + "医生",
         type: "success",
         duration: 3000
       });
