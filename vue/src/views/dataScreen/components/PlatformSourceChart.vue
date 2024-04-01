@@ -16,10 +16,10 @@ interface ChartProp {
 }
 
 const data = [
-  { value: 40, name: "智慧文旅平台", percentage: "40%" },
-  { value: 10, name: "携程", percentage: "10%" },
-  { value: 20, name: "飞猪", percentage: "20%" },
-  { value: 30, name: "其他渠道", percentage: "30%" }
+  { value: 40, name: "陕西省", percentage: "40%" },
+  { value: 10, name: "宁夏回族自治区", percentage: "10%" },
+  { value: 20, name: "甘肃省", percentage: "20%" },
+  { value: 30, name: "河南省", percentage: "30%" }
 ];
 
 const option: ECOption = {

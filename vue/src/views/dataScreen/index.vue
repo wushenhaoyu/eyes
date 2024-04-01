@@ -96,7 +96,7 @@
           </div>
           <div class="dataScreen-bottom">
             <div class="dataScreen-main-title">
-              <span>预约渠道数据统计</span>
+              <span>各省人数数据统计</span>
               <img src="./images/dataScreen-title.png" alt="" />
             </div>
             <div class="dataScreen-main-chart">

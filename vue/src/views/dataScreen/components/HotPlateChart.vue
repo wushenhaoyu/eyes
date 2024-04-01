@@ -2,7 +2,7 @@
   <!-- 热门板块 -->
   <div class="echarts-header">
     <span>排名</span>
-    <span>景区</span>
+    <span>医院</span>
     <span>预约数量</span>
   </div>
   <div class="echarts">
@@ -24,34 +24,34 @@ interface ChartProp {
 
 const data = [
   {
-    value: 79999,
-    name: "峨眉山",
+    value: 230,
+    name: "陕西省人民医院",
     percentage: "80%",
-    maxValue: 100000
+    maxValue: 500
   },
   {
-    value: 59999,
-    name: "稻城亚丁",
+    value: 155,
+    name: "西安交通大学医学院",
     percentage: "60%",
-    maxValue: 100000
+    maxValue: 500
   },
   {
-    value: 49999,
-    name: "九寨沟",
+    value: 146,
+    name: "西安国际医学中心",
     percentage: "50%",
-    maxValue: 100000
+    maxValue: 500
   },
   {
-    value: 39999,
-    name: "万里长城",
+    value: 123,
+    name: "西京医院",
     percentage: "40%",
-    maxValue: 100000
+    maxValue: 500
   },
   {
-    value: 29999,
-    name: "北京故宫",
+    value: 56,
+    name: "西工大附属医院",
     percentage: "30%",
-    maxValue: 100000
+    maxValue: 500
   }
 ];
 
