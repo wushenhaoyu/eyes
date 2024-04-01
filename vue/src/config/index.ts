@@ -10,7 +10,7 @@ export const LOGIN_URL: string = "/login";
 export const DEFAULT_PRIMARY: string = "#009688";
 
 // 路由白名单地址（本地存在的路由 staticRouter.ts 中）
-export const ROUTER_WHITE_LIST: string[] = ["/500"];
+export const ROUTER_WHITE_LIST: string[] = ["/500","login","/login/registerhospital","login/register"];
 
 // 高德地图 key
 export const AMAP_MAP_KEY: string = "";
@@ -19,3 +19,5 @@ export const AMAP_MAP_KEY: string = "";
 export const BAIDU_MAP_KEY: string = "";
 
 export const REGISTER_URL: string = "/login/register";
+
+export const REGISTERHOSPITAL_URL: string = "/login/registerhospital";

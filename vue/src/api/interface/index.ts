@@ -40,6 +40,7 @@ export namespace Login {
     message: string;
     access_token: string;
     success: number;
+    id:number;
   }
   export interface ResAuthButtons {
     [key: string]: string[];
@@ -50,7 +51,15 @@ export namespace Register {
     username: string;
     password: string;
     authCode: string;
+    name:string;
     verificationCode: string;
+  }
+  export interface ReqRegisterHospitalForm {
+    email: string;
+    name: string;
+    photo:any;
+    verificationCode: string;
+    location: [string,string,string];
   }
   export interface ResRegister {
     message: string;
@@ -101,5 +110,15 @@ export namespace User {
     id: string;
     name: string;
     children?: ResDepartment[];
+  }
+  export interface advice{
+    username: string;
+    gender: number;
+    idCard: string;
+    email: string;
+    address: string;
+    createTime: string[];
+    status: number;
+    
   }
 }

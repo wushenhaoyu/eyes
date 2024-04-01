@@ -10,14 +10,19 @@ export const getUserList = (params: User.ReqUserParams) => {
   return http.post<ResPage<User.ResUserList>>(PORT1 + `/user/list`, params);
 };
 
+//医生给出建议，待症患者转化为历史患者
+export const advice = (params: User.ReqUserParams) => {
+  return http.post<User.advice>(PORT1 + `/patientadvice/`, params);
+};
+
 //待诊用户列表
 export const getPatientWaittingList = (params: User.ReqUserParams) => {
-  return http.post<ResPage<User.ResUserList>>(PORT1 + `/getpatientwaittinglist`, params);
+  return http.post<ResPage<User.ResUserList>>(PORT1 + `/getpatientwaittinglist/`, params);
 };
 
 //已经诊断用户列表
 export const getPatientHistroyList = (params: User.ReqUserParams) => {
-  return http.post<ResPage<User.ResUserList>>(PORT1 + `/getpatienthistorylist`, params);
+  return http.post<ResPage<User.ResUserList>>(PORT1 + `/getpatienthistorylist/`, params);
 };
 
 // 获取树形用户列表

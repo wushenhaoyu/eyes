@@ -1,7 +1,7 @@
 <template>
   <!-- 实时访问 -->
   <div class="actual-total">
-    <div class="expect-total">可预约总量<i>999999</i>人</div>
+    <div class="expect-total">可预约总量<i>2000</i>人</div>
     <div class="actual-total">
       <div v-for="(item, index) in actualTotal.split('')" :key="index" class="actual-item">
         {{ item }}
@@ -19,11 +19,11 @@ import { ref } from "vue";
 import { ECOption } from "@/components/ECharts/config";
 import ECharts from "@/components/ECharts/index.vue";
 
-const actualTotal = ref("216908");
+const actualTotal = ref("000302");
 const option = {
   title: [
     {
-      text: (0.5 * 100).toFixed(0) + "%",
+      text: (302 * 100 / 2000).toFixed(0) + "%",
       left: "49%",
       top: "35%",
       textAlign: "center",
