@@ -1,6 +1,7 @@
 <template>
   <el-drawer v-model="drawerVisible" :destroy-on-close="true" size="80vw" :title="`${drawerProps.title}用户`">
-    <div style="width: 20vw">
+    <div style="display: flex;">
+    <div style="width: 30vw">
       <el-form
         ref="ruleFormRef"
         label-width="100px"
@@ -10,26 +11,8 @@
         :model="drawerProps.row"
         :hide-required-asterisk="drawerProps.isView"
       >
-        <!-- <el-form-item label="用户头像" prop="avatar">
-        <UploadImg v-model:image-url="drawerProps.row!.avatar" width="135px" height="135px" :file-size="3">
-          <template #empty>
-            <el-icon><Avatar /></el-icon>
-            <span>请上传头像</span>
-          </template>
-          <template #tip> 头像大小不能超过 3M </template>
-        </UploadImg>
-      </el-form-item>
-      <el-form-item label="用户照片" prop="photo">
-        <UploadImgs v-model:file-list="drawerProps.row!.photo" height="140px" width="140px" border-radius="50%">
-          <template #empty>
-            <el-icon><Picture /></el-icon>
-            <span>请上传照片</span>
-          </template>
-          <template #tip> 照片大小不能超过 5M </template>
-        </UploadImgs>
-      </el-form-item>-->
         <el-form-item label="用户姓名" prop="username">
-          <el-input v-model="drawerProps.row!.username" placeholder="请填写用户姓名" clearable></el-input>
+          <el-input  v-model="drawerProps.row!.username" placeholder="请填写用户姓名" clearable></el-input>
         </el-form-item>
         <el-form-item label="性别" prop="gender">
           <el-select v-model="drawerProps.row!.gender" placeholder="请选择性别" clearable>
@@ -45,8 +28,23 @@
         <el-form-item label="居住地址" prop="address">
           <el-input v-model="drawerProps.row!.address" placeholder="请填写居住地址" clearable></el-input>
         </el-form-item>
+        <el-form-item label="患者描述" prop="address">
+          <el-input v-model="drawerProps.row!.address" placeholder="请填写居住地址" clearable></el-input>
+        </el-form-item>
       </el-form>
     </div>
+    <div style="display: flex;justify-content: center;width: 50vw;">
+      <video-player
+      style="width: 90%;height: 100%;"
+    src="https://prod-streaming-video-msn-com.akamaized.net/a8c412fa-f696-4ff2-9c76-e8ed9cdffe0f/604a87fc-e7bc-463e-8d56-cde7e661d690.mp4"
+    poster=""
+    :controls="true"
+    :autoplay="true"
+    :loop="true"
+    :volume="0.6"
+  />
+    </div>
+  </div>
     <ProTable
       ref="proTable"
       :columns="columns"
@@ -96,6 +94,8 @@ import {
 getPatientHistroyList
 } from "@/api/modules/user";
 import { downloadVideo } from "@/api/modules/upload";
+import { VideoPlayer } from '@videojs-player/vue'
+import 'video.js/dist/video-js.css'
 //import UploadImg from "@/components/Upload/Img.vue";
 //import UploadImgs from "@/components/Upload/Imgs.vue";
 
