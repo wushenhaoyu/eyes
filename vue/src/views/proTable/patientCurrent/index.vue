@@ -196,7 +196,7 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
     }
   },
   { prop: "idCard", label: "身份证号", search: { el: "input" } },
-  { prop: "email", label: "邮箱" },
+  { prop: "email", label: "手机号" },
   { prop: "address", label: "居住地址" },
   /*{
     prop: "status",
@@ -288,6 +288,7 @@ const batchAdd = () => {
   dialogRef.value?.acceptParams(params);
 };
 
+
 // 打开 drawer(新增、查看、编辑)
 const drawerRef = ref<InstanceType<typeof UserDrawer> | null>(null);
 const openDrawer = (title: string, row: Partial<User.ResUserList> = {}) => {
@@ -296,7 +297,8 @@ const openDrawer = (title: string, row: Partial<User.ResUserList> = {}) => {
     isView: title === "查看",
     row: { ...row },
     api: title === "新增" ? addUser : title === "编辑" ? editUser : undefined,
-    getTableList: proTable.value?.getTableList
+    getTableList: proTable.value?.getTableList,
+    id:row.id
   };
   drawerRef.value?.acceptParams(params);
 };

@@ -9,15 +9,15 @@ import { ECOption } from "@/components/ECharts/config";
 import ECharts from "@/components/ECharts/index.vue";
 
 const curveData = [
-  { value: 30, spotName: "掘金" },
-  { value: 90, spotName: "CSDN" },
-  { value: 10, spotName: "Gitee" },
-  { value: 70, spotName: "GitHub" },
-  { value: 20, spotName: "知乎" },
-  { value: 60, spotName: "MyBlog" },
-  { value: 55, spotName: "简书" },
-  { value: 80, spotName: "StackOverFlow" },
-  { value: 50, spotName: "博客园" }
+  { value: 30, spotName: "西安交通大学第一附属医院" },
+  { value: 90, spotName: "西安国际医学中心" },
+  { value: 10, spotName: "西北工业大学附属医院" },
+  { value: 70, spotName: "空军军医大学西京医院" },
+  { value: 20, spotName: "陕西省第三人民医院" },
+  { value: 60, spotName: "空军军医大学唐都医院" },
+  { value: 55, spotName: "西安市红会医院" },
+  { value: 80, spotName: "陕西省人民医院" },
+  { value: 50, spotName: "西安交通大学第二附属医院" }
 ];
 
 const option: ECOption = {

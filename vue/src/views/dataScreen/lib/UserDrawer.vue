@@ -157,7 +157,6 @@ const dataCallback = (data: any) => {
 };
 
 const getTableList = (params: any) => {
-  console.log(drawerProps.value.row);
   
   let newParams = JSON.parse(JSON.stringify(params));
   newParams.createTime && (newParams.startTime = newParams.createTime[0]);

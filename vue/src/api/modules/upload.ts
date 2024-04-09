@@ -30,5 +30,6 @@ export const uploadVideo = (params: FormData) => {
 
 
 export const downloadVideo = (params: any )=> {
-  return http.post(PORT1 + `/video/`, params, { loading: false });
+  console.log(params)
+  return http.post(PORT1 + `/geturl/`, params, { loading: false });
 }

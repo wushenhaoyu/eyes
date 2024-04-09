@@ -22,8 +22,8 @@
         <el-form-item label="身份证号" prop="idCard">
           <el-input v-model="drawerProps.row!.idCard" placeholder="请填写身份证号" clearable></el-input>
         </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="drawerProps.row!.email" placeholder="请填写邮箱" clearable></el-input>
+        <el-form-item label="手机号" prop="email">
+          <el-input v-model="drawerProps.row!.email" placeholder="请填写手机号" clearable></el-input>
         </el-form-item>
         <el-form-item label="居住地址" prop="address">
           <el-input v-model="drawerProps.row!.address" placeholder="请填写居住地址" clearable></el-input>
@@ -36,7 +36,7 @@
     <div style="display: flex;justify-content: center;width: 50vw;">
       <video-player
       style="width: 90%;height: 100%;"
-    src="https://prod-streaming-video-msn-com.akamaized.net/a8c412fa-f696-4ff2-9c76-e8ed9cdffe0f/604a87fc-e7bc-463e-8d56-cde7e661d690.mp4"
+    :src="VideoUrl"
     poster=""
     :controls="true"
     :autoplay="true"
@@ -55,7 +55,7 @@
         :hide-required-asterisk="drawerProps.isView"
       >
       <el-form-item label="眼震视图">
-      <img style="height: 37.5vw;width:100%;" src="https://th.bing.com/th/id/R.5643b96fa77e23eba0f9e85fb99a8767?rik=WoXS2sLSaLYnyw&riu=http%3a%2f%2fnwzimg.wezhan.cn%2fcontents%2fsitefiles2021%2f10106186%2fimages%2f3190146.jpg&ehk=ExjNPXuSD7nAOauLtLJyFqxinw6jfjI%2flNwmoTwSt9M%3d&risl=&pid=ImgRaw&r=0">
+      <img style="height: 37.5vw;width:100%;" :src="ImageUrl">
   </el-form-item>
   <el-form-item label="机器判断">
    判断为右跳型眼震
@@ -126,12 +126,7 @@ import { downloadVideo } from "@/api/modules/upload";
 //import UploadImg from "@/components/Upload/Img.vue";
 //import UploadImgs from "@/components/Upload/Imgs.vue";
 
-onMounted(async () => {
-  const data =  await downloadVideo(drawerProps.value.row.id)
-  // 在这里添加你想要执行的函数
-  console.log(data)
 
-})
 const textarea1 = ref('')
 
 const rules = reactive({
@@ -140,7 +135,7 @@ const rules = reactive({
   username: [{ required: true, message: "请填写用户姓名" }],
   gender: [{ required: true, message: "请选择性别" }],
   idCard: [{ required: true, message: "请填写身份证号" }],
-  email: [{ required: true, message: "请填写邮箱" }],
+  email: [{ required: true, message: "请填写手机号" }],
   address: [{ required: true, message: "请填写居住地址" }]
 });
 
@@ -150,18 +145,28 @@ interface DrawerProps {
   row: Partial<User.ResUserList>;
   api?: (params: any) => Promise<any>;
   getTableList?: () => void;
+  id:string
 }
 
 const drawerVisible = ref(false);
 const drawerProps = ref<DrawerProps>({
   isView: false,
   title: "",
-  row: {}
+  row: {},
+  id:""
 });
 
+let VideoUrl = ref("");
+let ImageUrl = ref("");
 // 接收父组件传过来的参数
-const acceptParams = (params: DrawerProps) => {
-  drawerProps.value = params;
+const acceptParams = async (params: DrawerProps) => {
+  if (drawerProps.value.id != params.id) {
+    drawerProps.value = params;
+    const data =  await downloadVideo({id:drawerProps.value.id})
+    console.log(data)
+    VideoUrl = data.video
+    ImageUrl = data.picture
+  }    
   drawerVisible.value = true;
 };
 
@@ -196,7 +201,6 @@ const dataCallback = (data: any) => {
 };
 
 const getTableList = (params: any) => {
-  console.log(drawerProps.value.row);
   
   let newParams = JSON.parse(JSON.stringify(params));
   newParams.createTime && (newParams.startTime = newParams.createTime[0]);
@@ -259,7 +263,7 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
     label: "年龄"
   },
   { prop: "idCard", label: "身份证号" },
-  { prop: "email", label: "邮箱" },
+  { prop: "email", label: "手机号" },
   { prop: "address", label: "居住地址" },
   /*{
     prop: "status",

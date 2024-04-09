@@ -13,7 +13,7 @@
               <div class="img-box">
                 <img src="./images/book-sum.png" alt="" />
               </div>
-              <span class="left-number">848.132w</span>
+              <span class="left-number">15962次</span>
             </div>
           </el-col>
           <el-col class="mb40" :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
@@ -22,35 +22,35 @@
                 <div class="traffic-img">
                   <img src="./images/add_person.png" alt="" />
                 </div>
-                <span class="item-value">2222</span>
+                <span class="item-value">32</span>
                 <span class="traffic-name sle">待诊人数</span>
               </div>
               <div class="gitHub-traffic traffic-box">
                 <div class="traffic-img">
                   <img src="./images/add_team.png" alt="" />
                 </div>
-                <span class="item-value">2222</span>
+                <span class="item-value">1639</span>
                 <span class="traffic-name sle">历史检测人数</span>
               </div>
               <div class="today-traffic traffic-box">
                 <div class="traffic-img">
                   <img src="./images/today.png" alt="" />
                 </div>
-                <span class="item-value">4567</span>
+                <span class="item-value">11</span>
                 <span class="traffic-name sle">今日检测量</span>
               </div>
               <div class="yesterday-traffic traffic-box">
                 <div class="traffic-img">
                   <img src="./images/book_sum.png" alt="" />
                 </div>
-                <span class="item-value">1234</span>
+                <span class="item-value">49</span>
                 <span class="traffic-name sle">昨日检测量</span>
               </div>
             </div>
           </el-col>
           <el-col class="mb40" :xs="24" :sm="24" :md="24" :lg="10" :xl="10">
             <div class="item-right">
-              <div class="echarts-title">今日待诊人数 / 今日总人数</div>
+              <div class="echarts-title">今日待诊人数 / 今日已经诊数</div>
               <div class="book-echarts">
                 <Pie ref="pieRef" />
               </div>

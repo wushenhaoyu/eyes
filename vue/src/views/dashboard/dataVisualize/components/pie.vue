@@ -9,13 +9,13 @@ import { ECOption } from "@/components/ECharts/config";
 import ECharts from "@/components/ECharts/index.vue";
 
 const pieData = [
-  { value: 5000, name: "Gitee 访问量" },
-  { value: 5000, name: "GitHub 访问量" }
+  { value: 23, name: "今日待诊人数" },
+  { value: 5, name: "今日已经诊数" }
 ];
 
 const option: ECOption = {
   title: {
-    text: "Gitee / GitHub",
+    text: "待诊数 / 已诊数",
     subtext: "访问占比",
     left: "56%",
     top: "45%",
