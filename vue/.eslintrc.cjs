@@ -28,6 +28,7 @@ module.exports = {
    */
   rules: {
     // eslint (http://eslint.cn/docs/rules)
+    'no-warning-comments': 'warn'
   
   }
 };

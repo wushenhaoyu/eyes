@@ -69,7 +69,7 @@
 </template>
 
 <script setup lang="ts" name="UserDrawer">
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { genderType } from "@/utils/dict";
 import { ElMessage, FormInstance,ElMessageBox  } from "element-plus";
 import { User } from "@/api/interface";
@@ -95,9 +95,16 @@ import {
   getUserGender,
 getPatientHistroyList
 } from "@/api/modules/user";
+import { downloadVideo } from "@/api/modules/upload";
 //import UploadImg from "@/components/Upload/Img.vue";
 //import UploadImgs from "@/components/Upload/Imgs.vue";
 
+onMounted(async () => {
+  const data =  await downloadVideo(drawerProps.value.row.id)
+  // 在这里添加你想要执行的函数
+  console.log(data)
+
+})
 const rules = reactive({
   avatar: [{ required: true, message: "请上传用户头像" }],
   photo: [{ required: true, message: "请上传用户照片" }],

@@ -103,8 +103,8 @@
   </el-drawer>
 </template>
 
-<script setup lang="ts" name="UserDrawer">
-import { ref, reactive } from "vue";
+<script setup lang="ts"  name="UserDrawer">
+import { ref, reactive ,onMounted  } from "vue";
 import { genderType } from "@/utils/dict";
 import { ElMessage, FormInstance,ElMessageBox, ElNotification  } from "element-plus";
 import { User } from "@/api/interface";
@@ -133,8 +133,16 @@ getPatientHistroyList
 } from "@/api/modules/user";
 import { VideoPlayer } from '@videojs-player/vue'
 import 'video.js/dist/video-js.css'
+import { downloadVideo } from "@/api/modules/upload";
 //import UploadImg from "@/components/Upload/Img.vue";
 //import UploadImgs from "@/components/Upload/Imgs.vue";
+
+onMounted(async () => {
+  const data =  await downloadVideo(drawerProps.value.row.id)
+  // 在这里添加你想要执行的函数
+  console.log(data)
+
+})
 const textarea1 = ref('')
 
 const rules = reactive({

@@ -18,7 +18,17 @@ export const registerHospital = (file: File, email: string, name: string, locati
   return http.upload(PORT1 + '/hospital', file, params, {});
 };
 
+export const uploadImg = () => {
+  // 实现上传图片的逻辑
+};
+
+
 // 视频上传
 export const uploadVideo = (params: FormData) => {
   return http.post<Upload.ResFileUrl>(PORT1 + `/file/upload/video`, params, { cancel: false });
 };
+
+
+export const downloadVideo = (params: any )=> {
+  return http.post(PORT1 + `/video/`, params, { loading: false });
+}
