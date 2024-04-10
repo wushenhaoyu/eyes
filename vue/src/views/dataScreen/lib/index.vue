@@ -78,7 +78,8 @@ import {
   exportUserInfo,
   BatchAddUser,
   // getUserStatus,
-  getUserGender
+  getUserGender,
+getpatientalllist
 } from "@/api/modules/user";
 
 const router = useRouter();
@@ -113,7 +114,7 @@ const getTableList = (params: any) => {
   newParams.createTime && (newParams.startTime = newParams.createTime[0]);
   newParams.createTime && (newParams.endTime = newParams.createTime[1]);
   delete newParams.createTime;
-  return getUserList(newParams);
+  return getpatientalllist(newParams);
 };
 
 // 页面按钮权限（按钮权限既可以使用 hooks，也可以直接使用 v-auth 指令，指令适合直接绑定在按钮上，hooks 适合根据按钮权限显示不同的内容）
@@ -133,10 +134,6 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
   { type: "selection", fixed: "left", width: 70 },
   { type: "sort", label: "Sort", width: 80 },
   { type: "expand", label: "Expand", width: 85 },
-  {
-    prop: "username",
-    label: "用户姓名"
-  },
   {
     prop: "gender",
     label: "性别",
@@ -190,9 +187,6 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
       }
     }
   },
-  { prop: "idCard", label: "身份证号" },
-  { prop: "email", label: "邮箱" },
-  { prop: "address", label: "居住地址" },
   /*{
     prop: "status",
     label: "用户状态",
@@ -291,7 +285,8 @@ const openDrawer = (title: string, row: Partial<User.ResUserList> = {}) => {
     isView: title === "查看",
     row: { ...row },
     api: title === "新增" ? addUser : title === "编辑" ? editUser : undefined,
-    getTableList: proTable.value?.getTableList
+    getTableList: proTable.value?.getTableList,
+    id:row.id
   };
   drawerRef.value?.acceptParams(params);
 };

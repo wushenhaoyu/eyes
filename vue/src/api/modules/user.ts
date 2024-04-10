@@ -25,6 +25,11 @@ export const getPatientHistroyList = (params: User.ReqUserParams) => {
   return http.post<ResPage<User.ResUserList>>(PORT1 + `/getpatienthistorylist/`, params);
 };
 
+//全国眼震患者列表
+export const getpatientalllist = (params: User.ReqUserParams) => {
+  return http.post<ResPage<User.ResUserList>>(PORT1 + `/getpatientalllist/`, params);
+};
+
 // 获取树形用户列表
 export const getUserTreeList = (params: User.ReqUserParams) => {
   return http.post<ResPage<User.ResUserList>>(PORT1 + `/user/tree/list`, params);
