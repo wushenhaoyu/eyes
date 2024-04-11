@@ -14,7 +14,6 @@
         <el-button v-auth="'add'" type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
         <el-button v-auth="'batchAdd'" type="primary" :icon="Upload" plain @click="batchAdd">批量添加用户</el-button>
         <el-button v-auth="'export'" type="primary" :icon="Download" plain @click="downloadFile">导出用户数据</el-button>
-        <el-button type="primary" plain @click="toDetail">To 子集详情页面</el-button>
         <el-button
           type="danger"
           :icon="Delete"
@@ -293,7 +292,7 @@ const openDrawer = (title: string, row: Partial<User.ResUserList> = {}) => {
 
 const option: ECOption = {
   title: {
-    text: "Stacked Area Chart",
+    text: "",
     textStyle: {
       color: "#a1a1a1"
     }
@@ -341,10 +340,10 @@ const option: ECOption = {
         color: "#a1a1a1"
       }
     }
-  ],
+  ],  
   series: [
     {
-      name: "Email",
+      name: "陕西省人民医院",
       type: "line",
       stack: "Total",
       areaStyle: {},
@@ -354,7 +353,7 @@ const option: ECOption = {
       data: [120, 132, 101, 134, 90, 230, 210]
     },
     {
-      name: "Union Ads",
+      name: "西京医院",
       type: "line",
       stack: "Total",
       areaStyle: {},
@@ -364,7 +363,7 @@ const option: ECOption = {
       data: [220, 182, 191, 234, 290, 330, 310]
     },
     {
-      name: "Video Ads",
+      name:  "西交第一附属医院",
       type: "line",
       stack: "Total",
       areaStyle: {},
@@ -374,7 +373,7 @@ const option: ECOption = {
       data: [150, 232, 201, 154, 190, 330, 410]
     },
     {
-      name: "Direct",
+      name: "西交第二附属医院",
       type: "line",
       stack: "Total",
       areaStyle: {},
@@ -384,7 +383,7 @@ const option: ECOption = {
       data: [320, 332, 301, 334, 390, 330, 320]
     },
     {
-      name: "Search Engine",
+      name: "西工大附属医院",
       type: "line",
       stack: "Total",
       label: {

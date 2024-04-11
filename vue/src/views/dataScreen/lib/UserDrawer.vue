@@ -57,7 +57,7 @@
         <el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
       </template>
     </ProTable>
-    <UserDrawer1 ref="drawerRef" />
+    <UserDrawer ref="drawerRef" />
 
     <template #footer>
       <el-button @click="drawerVisible = false">取消</el-button>
@@ -76,7 +76,7 @@ import { useDownload } from "@/hooks/useDownload";
 /*import { useAuthButtons } from "@/hooks/useAuthButtons";*/
 import ProTable from "@/components/ProTable/index.vue";
 import ImportExcel from "@/components/ImportExcel/index.vue";
-import UserDrawer1 from "@/views/proTable/components/UserDrawer1.vue";
+import UserDrawer from "@/views/dataScreen/lib/UserDrawer.vue";
 import { ProTableInstance, ColumnProps, HeaderRenderScope } from "@/components/ProTable/interface";
 import { CirclePlus, Delete, Download, Upload, View } from "@element-plus/icons-vue";
 import {

@@ -61,11 +61,12 @@
     </el-form-item>
       <el-form-item label="医生评价">
           <el-input
-    
+    v-model="advice"
     style="width: 100vw;margin-bottom: 20px;"
     :rows="5"
     type="textarea"
     placeholder="Please input"
+    readonly
   />
         </el-form-item>
     </el-form>
@@ -154,6 +155,7 @@ const drawerProps = ref<DrawerProps>({
 // 接收父组件传过来的参数
 let VideoUrl = ref("");
 let ImageUrl = ref("");
+let advice = ref("");
 // 接收父组件传过来的参数
 const acceptParams = async (params: DrawerProps) => {
   if (drawerProps.value.id != params.id) {
@@ -162,6 +164,7 @@ const acceptParams = async (params: DrawerProps) => {
     console.log(data)
     VideoUrl = data.video
     ImageUrl = data.picture
+    advice = data.Advice
   }    
   drawerVisible.value = true;
 };
@@ -220,13 +223,12 @@ const proTable = ref<ProTableInstance>();
 
 // 表格配置项
 const columns = reactive<ColumnProps<User.ResUserList>[]>([
-  { type: "selection", fixed: "left", width: 70 },
   { type: "sort", label: "Sort", width: 80 },
-  { type: "expand", label: "Expand", width: 85 },
   { prop: "username", label: "用户姓名", width: 85 },
   {
     prop: "gender",
     label: "性别",
+    width:80
   },
   /* {
     prop: "status",
@@ -254,11 +256,12 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
   },*/
   {
     prop: "user.detail.age",
-    label: "年龄"
+    label: "年龄",
+    width:80
   },
   { prop: "idCard", label: "身份证号" },
   { prop: "email", label: "手机号" },
-  { prop: "address", label: "居住地址" },
+  { prop: "address", label: "居住地址",width:240 },
   /*{
     prop: "status",
     label: "用户状态",
@@ -310,7 +313,8 @@ const openDrawer = (title: string, row: Partial<User.ResUserList> = {}) => {
     isView: title === "查看",
     row: { ...row },
     api: title === "新增" ? addUser : title === "编辑" ? editUser : undefined,
-    getTableList: proTable.value?.getTableList
+    getTableList: proTable.value?.getTableList,
+    id:row.id
   };
   drawerRef.value?.acceptParams(params);
 };

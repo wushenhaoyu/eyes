@@ -13,7 +13,6 @@
         <el-button v-auth="'add'" type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
         <el-button v-auth="'batchAdd'" type="primary" :icon="Upload" plain @click="batchAdd">批量添加用户</el-button>
         <el-button v-auth="'export'" type="primary" :icon="Download" plain @click="downloadFile">导出用户数据</el-button>
-        <el-button type="primary" plain @click="toDetail">To 子集详情页面</el-button>
         <el-button
           type="danger"
           :icon="Delete"
@@ -45,8 +44,8 @@
       <template #operation="scope">
         <el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
       </template>
-    </ProTable>
-    <UserDrawer ref="drawerRef" />
+    </ProTable >
+    <UserDrawer ref="drawerRef" @notifyParent="handleNotify" />
     <ImportExcel ref="dialogRef" />
   </div>
 </template>
@@ -77,6 +76,9 @@ import {
   getUserGender,
 getPatientWaittingList
 } from "@/api/modules/user";
+const handleNotify = () => {
+  proTable.value.getTableList()
+}
 
 const router = useRouter();
 const showDeleteButton = false;
@@ -127,24 +129,15 @@ const headerRender = (scope: HeaderRenderScope<User.ResUserList>) => {
 
 // 表格配置项
 const columns = reactive<ColumnProps<User.ResUserList>[]>([
-  { type: "selection", fixed: "left", width: 70 },
   { type: "sort", label: "Sort", width: 80 },
-  { type: "expand", label: "Expand", width: 85 },
   {
     prop: "username",
     label: "用户姓名",
-    search: { el: "input", tooltip: "我是搜索提示" },
-    render: scope => {
-      return (
-        <el-button type="primary" link onClick={() => ElMessage.success("我是通过 tsx 语法渲染的内容")}>
-          {scope.row.username}
-        </el-button>
-      );
-    }
   },
   {
     prop: "gender",
     label: "性别",
+    width: 80,
     // 字典数据（本地数据）
     // enum: genderType,
     // 字典请求不带参数
@@ -182,6 +175,7 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
     // 多级 prop
     prop: "user.detail.age",
     label: "年龄",
+    width: 80,
     search: {
       // 自定义 search 显示内容
       render: ({ searchParam }) => {
@@ -197,7 +191,7 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
   },
   { prop: "idCard", label: "身份证号", search: { el: "input" } },
   { prop: "email", label: "手机号" },
-  { prop: "address", label: "居住地址" },
+  { prop: "address", label: "居住地址",width: 240  },
   /*{
     prop: "status",
     label: "用户状态",

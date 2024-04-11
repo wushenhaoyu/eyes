@@ -10,7 +10,7 @@ import ECharts from "@/components/ECharts/index.vue";
 
 const option: ECOption = {
   title: {
-    text: "Stacked Area Chart",
+    text: "",
     textStyle: {
       color: "#a1a1a1"
     }
