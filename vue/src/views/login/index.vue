@@ -3,7 +3,7 @@
     <div class="login-box">
       <SwitchDark class="dark" />
       <div class="login-left">
-        <img class="login-left-img" src="@/assets/images/login_left.png" alt="login" />
+        <img class="login-left-img" src="@/assets/images/bg.png" alt="login" />
       </div>
       <div class="login-form">
         <div class="login-logo">
@@ -14,6 +14,7 @@
       </div>
     </div>
   </div>
+  <p style="background:none;height: 5%;position: fixed;bottom: 0px;width: 100%;text-align: center;">     <a href="https://beian.miit.gov.cn/" target="_blank">陕ICP备2024028833号-1</a></p>
 </template>
 
 <script setup lang="ts" name="login">

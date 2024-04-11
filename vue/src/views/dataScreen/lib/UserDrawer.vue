@@ -57,7 +57,7 @@
         <el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
       </template>
     </ProTable>
-    <UserDrawer ref="drawerRef" />
+    <UserDrawer  ref="drawerRef" />
 
     <template #footer>
       <el-button @click="drawerVisible = false">取消</el-button>

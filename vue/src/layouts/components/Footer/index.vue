@@ -1,6 +1,6 @@
 <template>
   <div class="footer flx-center">
-    <a href="https://github.com/HalseySpicy" target="_blank"> 2022 © Geeker-Admin By Geeker Technology. </a>
+    <a href="https://beian.miit.gov.cn/" target="_blank">陕ICP备2024028833号-1</a>
   </div>
 </template>
 
