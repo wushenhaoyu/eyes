@@ -16,21 +16,58 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from user.views import regView,index,welcome,loginView,register_doctor,post_email,doctor_login
-
+from user.views import gender,test,getUserList,PatientAdvice,getHistoryUserList,index_vue,geturl,getALLUserList
+from django.contrib import admin
+from user.DoctorView import post_email,doctor_login,register_doctor
+from user.WXReceive import ReceivePatient,save_media,update_patinet_message,change_hospital
+from user.Hospital import hospital,GenerateHospitalAuthCode,getALLhosoitallist
 urlpatterns = [
-    path('',loginView),
-    path('api/admin/', admin.site.urls),
-    # path('api/login/',loginView),
-    path('api/reg/',regView),
-    path('api/index/',index),
-    path('api/doctorReg/',register_doctor),
+    path('', index_vue),
+    path('index/', index_vue),
+    path('api/index/', index_vue),
+    path('register/',register_doctor),
+    path('api/register/',register_doctor),
+    path("login/",doctor_login),
     path("api/login/",doctor_login),
-    path("api/emailVer/",post_email),
-    # path('write/',write),
-    # path('user_articles/', view_user_articles, name='view_user_articles'),
-    # path('edit_article/<int:article_id>/', edit_article, name='edit_article'),
-    # path('published_articles/', view_published_articles, name='view_published_articles'),
-    # path('view_article/<int:article_id>/', view_article, name='view_article'),
-    # path('logout/', logout_view, name='logout'),
+    path("email/",post_email),
+    path("api/email/",post_email),
+    path("user/gender",gender),
+    path("api/user/gender",gender),
+    path("test",test),
+    path("api/test",test),
+    path("Bravo/hospital/eye/register",GenerateHospitalAuthCode),
+    path("api/Bravo/hospital/eye/register",GenerateHospitalAuthCode),
+    path("getpatientwaittinglist/",getUserList),
+    path("api/getpatientwaittinglist/",getUserList),
+    path("getpatienthistorylist/",getHistoryUserList),
+    path("api/getpatienthistorylist/",getHistoryUserList),
+    path("ReceivePatient/",ReceivePatient),
+    path("api/ReceivePatient/",ReceivePatient),
+
+    path("UpdatePatientMessage/",update_patinet_message),
+    path("api/UpdatePatientMessage/",update_patinet_message),
+
+    path("getpatientalllist/",getALLUserList),
+    path("api/getpatientalllist/",getALLUserList),
+
+    path("changeHospital/",change_hospital),
+    path("api/changeHospital/",change_hospital),
+
+
+    path("geturl/",geturl),
+    path("api/geturl/",geturl),
+
+    path("getALLhosoitallist/",getALLhosoitallist),
+    path("api/getALLhosoitallist/",getALLhosoitallist),
+
+    path("ReceiveMedia/",save_media),
+    path("api/ReceiveMedia/",save_media),
+    path("getUserList/",getUserList),
+    path("api/getUserList/",getUserList),
+    path("hospital",hospital),
+    path("api/hospital",hospital),
+    path('admin/', admin.site.urls),
+    path('patientadvice/', PatientAdvice),
+    path('api/patientadvice/', PatientAdvice),
+
 ]

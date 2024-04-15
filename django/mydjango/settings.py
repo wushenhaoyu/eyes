@@ -16,6 +16,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+#/home/eyes/django
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -26,8 +27,8 @@ SECRET_KEY = 'django-insecure-i6-589f44_6-#d#trftp6&jjd$ur!meta)p9&u1e*jl6ko4)j!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['nwpu.site']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
+
 
 # Application definition
 
@@ -56,7 +57,10 @@ ROOT_URLCONF = 'mydjango.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,"templates")],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'dist'),
+            # '/home/dist/',  # 添加额外的模板目录
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,20 +72,54 @@ TEMPLATES = [
         },
     },
 ]
+# STATIC_URL = '/dist/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'dist')
+#
+# STATICFILES_DIRS = [
+# os.path.join(BASE_DIR, "dist/assets"),
+# ]
+
+# settings.py
+MEDIA_ROOT = os.path.join(BASE_DIR, 'picture')
+MEDIA_URL = '/picture/'
+
+STATIC_URL = '/assets/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+STATICFILES_DIRS = [
+os.path.join(BASE_DIR, "dist/assets"),
+]
 
 WSGI_APPLICATION = 'mydjango.wsgi.application'
-
+CSRF_TRUSTED_ORIGINS = ['https://nwpu.space']
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
+    'default': {
+
+        'ENGINE': 'django.db.backends.mysql',  # 默认
+
+        'NAME': 'django',  # 连接的数据库  #一定要存在的数据库名
+
+        'HOST': '1.13.156.137', # mysql的ip地址
+
+        'PORT': 3306,  # mysql的端口
+
+        'USER': 'eye',  # mysql的用户名
+
+        'PASSWORD': 'Bravo2021.'  # mysql的密码
+
+    }
+
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -119,15 +157,12 @@ TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
-
-USE_L10N = True
-
 USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -138,13 +173,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 #邮箱发送信息配置
-
-# 用于发送邮件的邮箱
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True  # 是否使用TLS安全传输协议(用于在两个通信应用程序之间提供保密性和数据完整性)
-EMAIL_USE_SSL = False  # 是否使用SSL加密，qq企业邮箱要求使用，163邮箱设置为True的时候会报ssl的错误
-EMAIL_HOST = 'smtp.163.com'  # 发送邮件的邮箱的SMTP服务器，这里用的是163邮箱
-EMAIL_PORT = 465  # 发件箱的SMTP服务器端口，默认是25
-EMAIL_HOST_USER = 'Bravoeye@163.com'  # 发送邮件的邮箱地址
-EMAIL_HOST_PASSWORD = 'PCIDBIQVEWRDIVUU'  # 发送邮件的邮箱密码(这里使用的是授权码)
-
+#
+# # 用于发送邮件的邮箱
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_USE_TLS = True  # 是否使用TLS安全传输协议(用于在两个通信应用程序之间提供保密性和数据完整性)
+# EMAIL_USE_SSL = False  # 是否使用SSL加密，qq企业邮箱要求使用，163邮箱设置为True的时候会报ssl的错误
+# EMAIL_HOST = 'smtp.163.com'  # 发送邮件的邮箱的SMTP服务器，这里用的是163邮箱
+# EMAIL_PORT = 25  # 发件箱的SMTP服务器端口，默认是25
+# EMAIL_HOST_USER = 'Bravoeye@163.com'  # 发送邮件的邮箱地址
+# EMAIL_HOST_PASSWORD = 'GKZOBAILKONLMRLI'  # 发送邮件的邮箱密码(这里使用的是授权码)
+#
+smtp_server = "smtp.163.com"  # SendGrid SMTP 服务器地址
+smtp_port = 465  # SendGrid SMTPS 服务器端口
+smtp_username = 'Bravoeye@163.com'
+smtp_password = "OXSGUDMRVZOQLIKC"
+from_address = "Bravoeye@163.com"
