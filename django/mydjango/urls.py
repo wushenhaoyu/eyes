@@ -19,7 +19,7 @@ from django.urls import path
 from user.views import gender,test,getUserList,PatientAdvice,getHistoryUserList,index_vue,geturl,getALLUserList
 from django.contrib import admin
 from user.DoctorView import post_email,doctor_login,register_doctor
-from user.WXReceive import ReceivePatient,save_media,update_patinet_message,change_hospital
+from user.WXReceive import ReceivePatient,save_media,update_patinet_message,change_hospital,return_advice
 from user.Hospital import hospital,GenerateHospitalAuthCode,getALLhosoitallist
 urlpatterns = [
     path('', index_vue),
@@ -46,6 +46,9 @@ urlpatterns = [
 
     path("UpdatePatientMessage/",update_patinet_message),
     path("api/UpdatePatientMessage/",update_patinet_message),
+
+    path("return_advice/",return_advice),
+    path("api/return_advice/",return_advice),
 
     path("getpatientalllist/",getALLUserList),
     path("api/getpatientalllist/",getALLUserList),

@@ -236,3 +236,33 @@ def change_hospital(request):
     else:
         response = JsonResponse({'message': "method not allowed"})
         return response
+
+
+def return_advice(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        print(data)
+        phone_number = data.get("phone")
+        MedicalRecordTime1 = data.get("date")
+
+        # 解析不包含秒的日期时间字符串
+        MedicalRecordTime = datetime.strptime(MedicalRecordTime1, "%Y-%m-%dT%H:%M:%S")
+        print(MedicalRecordTime)
+        if HistoryRecords.objects.filter(patient__phone_number=phone_number,
+                                                             MedicalRecordTime=MedicalRecordTime):
+            specific_medical_record = HistoryRecords.objects.get(patient__phone_number=phone_number,
+                                                                 MedicalRecordTime=MedicalRecordTime)
+            response = JsonResponse(
+                {'advice': specific_medical_record.DoctorOpinion, "time": specific_medical_record.AdviceTime,
+                 "doctor": specific_medical_record.DoctorName})
+            return response
+        else:
+            response = JsonResponse(
+                {'advice': 0, "time": 0,
+                 "doctor": 0})
+            return response
+
+
+    else:
+        response = JsonResponse({'message': "method not allowed"})
+        return response

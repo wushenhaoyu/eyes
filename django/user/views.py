@@ -30,14 +30,15 @@ def get_substring_after_last_occurrence(input_string, char="t"):
 ##检查是否登录
 def is_login(token):
     if token and Doctor.objects.filter(token=token):
-        LastLoginTime = int(get_substring_after_last_occurrence(token))
-        NowTime = int(time.time())
-        if NowTime - LastLoginTime < 1209600:
-            return True
-        else:
-            return False
-    else:
-        return False
+        return True
+    #     LastLoginTime = int(get_substring_after_last_occurrence(token))
+    #     NowTime = int(time.time())
+    # #     if NowTime - LastLoginTime < 1209600:
+    # #         return True
+    # #     else:
+    # #         return False
+    # # else:
+    # #     return False
 
 
 ##
@@ -78,6 +79,7 @@ def getUserList(request):
     if request.method == "POST":
         data = json.loads(request.body)
         token = request.headers.get('X-Access-Token', '')
+        print(token)
         if not is_login(token):
             print(123)
             response = JsonResponse({'message': "please login first", "success": 0}, status=401)
@@ -282,6 +284,7 @@ def PatientAdvice(request):
         print(data)
         phone_number = data.get('email')
         MedicalRecordTime = data.get('createTime')
+        name = data.get('doctor')
         advice = data.get('advice')
         medical_recordss = MedicalRecords.objects.filter(patient__phone_number=phone_number,MedicalRecordTime=MedicalRecordTime)
         medical_record=medical_recordss[0]
@@ -294,6 +297,8 @@ def PatientAdvice(request):
                 PictureName=medical_record.PictureName,
                 VideoName=medical_record.VideoName,
                 MedicalRecordResult=medical_record.MedicalRecordResult,
+                AdviceTime=timezone.now(),
+                DoctorName = name,
                 DoctorOpinion=advice  # 使用从请求中获取的 advice 作为 DoctorOpinion
             )
             history_record.save()  # 保存新的 HistoryRecords 记录

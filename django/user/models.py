@@ -36,21 +36,19 @@ class MedicalRecords(models.Model):
     PictureName = models.CharField(max_length=255, blank=True, null=True)
 
 
-
+from django.utils import timezone
 class HistoryRecords(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     HospitalForTreatment = models.CharField(max_length=15,default="")
-    # MedicalRecordTime = models.CharField(max_length=100,default="")
     MedicalRecordTime = models.DateTimeField(db_index=True)
+    AdviceTime = models.DateTimeField(db_index=True, default=timezone.now)
     MedicalRecordStatus = models.BooleanField(default=False)
-    # Picture = models.ImageField(upload_to='picture/', blank=True, null=True)
     MedicalRecordResult = models.CharField(max_length=50,default="")
-    # Video = models.FileField(upload_to='videos/', blank=True, null=True)
+    DoctorName = models.CharField(max_length=50, default="")
     VideoName = models.CharField(max_length=255, blank=True, null=True)
     PictureName = models.CharField(max_length=255, blank=True, null=True)
     DoctorOpinion = models.CharField(max_length=150)
-    # VideoLink = models.URLField(max_length=200, blank=True, null=True)
-    # PhotoLink = models.URLField(max_length=200, blank=True, null=True)
+
 
 
 
